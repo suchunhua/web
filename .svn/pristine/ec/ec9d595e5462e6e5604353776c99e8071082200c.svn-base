@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\..\\src\\common\\config\\locale\\en.js"
+    ],
+    "names": [
+        "SYSTEM_SESSION_EXPIRED",
+        "ADMIN_USERNAME_NOT_EXIST",
+        "ADMIN_PASSWORD_NOT_MATCH",
+        "ADMIN_PARAM_LACKED",
+        "ADMIN_PARAM_ERROR",
+        "ADMIN_NOT_EMPTY",
+        "ADMIN_NOT_FOND_DATA"
+    ],
+    "mappings": "AAAA;;;kBAEe;AACbA,0BAAwB,CAAC,KAAD,EAAQ,iBAAR,CADX;;AAGbC,4BAA0B,CAAC,KAAD,EAAQ,qBAAR,CAHb;AAIbC,4BAA0B,CAAC,KAAD,EAAQ,qBAAR,CAJb;;AAMbC,sBAAoB,CAAC,KAAD,EAAQ,iBAAR,CANP;AAObC,qBAAmB,CAAC,KAAD,EAAQ,kBAAR,CAPN;;AASbC,mBAAgB,CAAC,KAAD,EAAO,aAAP,CATH;AAUbC,uBAAoB,CAAC,4BAAD;AAVP,C",
+    "file": "..\\..\\..\\..\\src\\common\\config\\locale\\en.js",
+    "sourcesContent": [
+        "'use strict';\n\nexport default {\n  SYSTEM_SESSION_EXPIRED: [10001, 'session expired'],\n\n  ADMIN_USERNAME_NOT_EXIST: [20001, 'username not exist!'],\n  ADMIN_PASSWORD_NOT_MATCH: [20002, 'password not match!'],\n\n  ADMIN_PARAM_LACKED: [20010, 'lack paramaters'],\n  ADMIN_PARAM_ERROR: [20011, 'error paramaters'],\n\n  ADMIN_NOT_EMPTY:[30001,'%s is empty'],\n  ADMIN_NOT_FOND_DATA:['can not fond data ,id = %s'],\n};"
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\home\\controller\\about.js"
+    ],
+    "names": [
+        "mgr",
+        "indexAction",
+        "model",
+        "where",
+        "type",
+        "find",
+        "ceo",
+        "boss",
+        "isdelete",
+        "select",
+        "science",
+        "assign",
+        "display"
+    ],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;AACA;;;;;;AAEA,IAAIA,MAAM,sBAAV;;;;;;;;;;AAGE;;;;mBAIMC,W;;;;;;;;qBAEY,KAAKC,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB,EAACC,MAAK,CAAN,EAAzB,EAAmCC,IAAnC,E;;;AAAZC,iB;;qBACa,KAAKJ,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB,EAACC,MAAK,CAAN,EAAzB,EAAmCC,IAAnC,E;;;AAAbE,kB;;qBACgB,KAAKL,KAAL,CAAW,iBAAX,EAA8BC,KAA9B,CAAoC,EAACK,UAAS,CAAV,EAApC,EAAkDC,MAAlD,E;;;AAAhBC,qB;;;AAEJ;;;;;;;;;;;;;;;;;;;;AAqBA;;;;;;;;;;AAUA,mBAAKC,MAAL,CAAY,KAAZ,EAAkBL,GAAlB;AACA,mBAAKK,MAAL,CAAY,MAAZ,EAAmBJ,IAAnB;AACA,mBAAKI,MAAL,CAAY,SAAZ,EAAsBD,OAAtB;;+CAEO,KAAKE,OAAL,E",
+    "file": "..\\..\\..\\src\\home\\controller\\about.js",
+    "sourcesContent": [
+        "'use strict';\r\n\r\nimport Base from './base.js';\r\nimport BizMgr from '../connect/bizmgr.js';\r\n\r\nvar mgr = new BizMgr();\r\n\r\nexport default class extends Base {\r\n  /**\r\n   * index action\r\n   * @return {Promise} []\r\n   */\r\n  async indexAction(){\r\n    //auto render template file index_index.html\r\n    let ceo = await this.model('boss').where({type:0}).find();\r\n    let boss = await this.model('boss').where({type:1}).find();\r\n    let science = await this.model('science_advisor').where({isdelete:0}).select();\r\n    \r\n    /*\r\n\tlet pm = await mgr.getDiscPriceList(1)\r\n\t  .then( function (result) { \r\n\t\t\tfor(let j in result.discList){\r\n\t\t\t\tvar elm = result.discList[j];\r\n\t\t\t\tconsole.log(elm);\t\t\t\t\r\n\t\t\t}\r\n\t\t},   \r\n\t\tfunction (error) {   \r\n\t\t   console.log(error);   \r\n\t\t});\r\n\t\r\n\r\n\tlet pm = await mgr.addTestOrder(79, 97, \"1,1\", \"13977665555\", \"xx\", \"zj\")\r\n\t  .then( function (result) {\r\n\t\t  return result;\r\n\t\t},   \r\n\t\tfunction (error) {   \r\n\t\t   console.log(error);   \r\n\t\t});\r\n\t*/\r\n    /*\r\n    var jsobj = new Object();\r\n    jsobj.a1=\"a1\";\r\n    jsobj.f1=\"f1\";\r\n    jsobj.s1=\"s1\";\r\n    \r\n    var str = JSON.stringify(jsobj);\r\n    console.log(\"BBB: \"+str);\r\n    */\r\n    \r\n    this.assign('ceo',ceo);\r\n    this.assign('boss',boss);\r\n    this.assign('science',science);\r\n\r\n    return this.display();\r\n  }\r\n}"
+    ]
+}

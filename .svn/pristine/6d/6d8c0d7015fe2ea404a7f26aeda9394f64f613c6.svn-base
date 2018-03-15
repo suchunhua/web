@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\home\\controller\\test.js"
+    ],
+    "names": [
+        "indexAction",
+        "display",
+        "registerAction",
+        "test",
+        "post",
+        "console",
+        "log",
+        "senderId",
+        "cookie",
+        "alipaynotifyAction",
+        "userId",
+        "infor",
+        "success"
+    ],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;AACA;;;;;;;;;;;;;;kBAIAA,W,0BAAa;AACZ,SAAO,KAAKC,OAAL,EAAP;AACA,E;;kBAEDC,c,6BAAgB;;AAGf,MAAIC,OAAO,KAAKC,IAAL,EAAX;;AAEAC,UAAQC,GAAR,CAAYH,IAAZ;;AAEA,MAAII,WAAW,KAAKC,MAAL,CAAY,QAAZ,CAAf;AACAH,UAAQC,GAAR,CAAYC,QAAZ;AACA,SAAO,KAAKN,OAAL,EAAP;AACA,E;;kBAGMQ,kB;;;;;;;;AAEJJ,eAAQC,GAAR,CAAY,6CAAZ;;AAEII,a,GAAS,KAAKF,MAAL,CAAY,QAAZ,C;;;AAKbH,eAAQC,GAAR,CAAYI,MAAZ;;AAGGC,Y,GAAQ,KAAKP,IAAL,E;;;AAGXC,eAAQC,GAAR,CAAYK,KAAZ;;AAGA;;AAEA;;;wCAKQ,KAAKC,OAAL,CAAaD,KAAb,C",
+    "file": "..\\..\\..\\src\\home\\controller\\test.js",
+    "sourcesContent": [
+        "'use strict';\r\n\r\nimport Base from './base.js';\r\nimport UserMgr from '../connect/usermgr.js';\r\n\r\n\r\nexport default class extends Base {\r\nindexAction(){\r\n\treturn this.display();\r\n}\r\n\r\nregisterAction(){\r\n\r\n\r\n\tlet test = this.post();\r\n\r\n\tconsole.log(test);\r\n\r\n\tlet senderId = this.cookie('userId');\r\n\tconsole.log(senderId);\r\n\treturn this.display()\r\n}\r\n\r\n\r\nasync  alipaynotifyAction(){\r\n\r\n\t \tconsole.log(\"==========alipaynotifyAction start=========\");\r\n\r\n\t \tlet userId = this.cookie('userId');\r\n\r\n\r\n\t \t\r\n\t \t\r\n\t \tconsole.log(userId);\r\n\r\n\r\n\t\tvar infor = this.post();\r\n\r\n\r\n\t \tconsole.log(infor);\r\n\t \t\r\n\t \t\r\n\t \t//var senderId = 220;\r\n\t \t\r\n\t \t//var senderId = 236;\r\n\t \t\r\n\r\n\r\n\r\n\t \treturn  this.success(infor);\r\n\r\n\r\n\t }\r\n}"
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\delete.js"
+    ],
+    "names": [
+        "getAction",
+        "fail",
+        "postAction",
+        "obj",
+        "post",
+        "id",
+        "console",
+        "log",
+        "model",
+        "where",
+        "find",
+        "data",
+        "think",
+        "isEmpty",
+        "update",
+        "isdelete",
+        "success"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;;;;;;;;;mBAIQA,S;;;;;;+CAEG,KAAKC,IAAL,CAAU,yBAAV,C;;;;;;;;;;;;;;;;;mBAGHC,U;;;;;;;AAEDC,iB,GAAM,KAAKC,IAAL,CAAU,KAAV,C;AACNC,gB,GAAK,KAAKD,IAAL,CAAU,IAAV,C;;AACTE,sBAAQC,GAAR,CAAYJ,GAAZ,EAAgBE,EAAhB;;oBACG,CAACF,GAAD,IAAQ,CAACE,E;;;;;gDACJ,KAAKJ,IAAL,CAAU,oBAAV,C;;;AAER,kBAAGE,OAAO,SAAV,EAAoB;AACnBA,sBAAM,iBAAN;AACA;AACGK,mB,GAAQ,KAAKA,KAAL,CAAWL,GAAX,C;;qBACKK,MAAMC,KAAN,CAAY,EAACJ,IAAGA,EAAJ,EAAZ,EAAqBK,IAArB,E;;;AAAbC,kB;;kBACAC,MAAMC,OAAN,CAAcF,IAAd,C;;;;;6BACI,I;;qBAAmBH,MAAMM,MAAN,CAAa,EAACT,IAAGA,EAAJ,EAAOU,UAAS,CAAhB,EAAb,C;;;;6DAAdC,O;;;gDAEL,KAAKf,IAAL,CAAU,6BAA6BI,EAAvC,C;;;;;;;;;;;;;;;;;;;;;AAIV",
+    "file": "..\\..\\..\\src\\admin\\controller\\delete.js",
+    "sourcesContent": [
+        "import Base from './base.js';\r\n\r\nexport default class extends Base {\r\n\t\r\n  async getAction() {\r\n    // console.log(this.get());\r\n    return this.fail('please use post method!');\r\n  }\r\n\r\n  async postAction(){\r\n\r\n  \tlet obj = this.post('obj');\r\n  \tlet id = this.post('id');\r\n  \tconsole.log(obj,id);\r\n  \tif(!obj || !id){\r\n  \t\treturn this.fail('ADMIN_PARAM_LACKED');\r\n  \t}\r\n  \tif(obj == 'science'){\r\n  \t\tobj = 'science_advisor';\r\n  \t}\r\n  \tlet model = this.model(obj);\r\n  \tlet data = await model.where({id:id}).find();\r\n  \tif(!think.isEmpty(data)){\r\n  \t\treturn this.success(await model.update({id:id,isdelete:1}));\r\n  \t}else{\r\n  \t\treturn this.fail('can not fond data ,id = ' + id);\r\n  \t}\r\n  }\r\n  \r\n};"
+    ]
+}

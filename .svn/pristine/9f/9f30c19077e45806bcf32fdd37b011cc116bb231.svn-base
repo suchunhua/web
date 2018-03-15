@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\home\\controller\\news.js"
+    ],
+    "names": [
+        "indexAction",
+        "type",
+        "parseInt",
+        "get",
+        "page",
+        "size",
+        "where",
+        "isdelete",
+        "model",
+        "order",
+        "countSelect",
+        "list",
+        "total",
+        "i",
+        "totalPages",
+        "push",
+        "assign",
+        "data",
+        "currentPage",
+        "display",
+        "getNewsAction",
+        "id",
+        "find",
+        "success",
+        "fail",
+        "detailAction",
+        "detail"
+    ],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;AAGI;;;;qBAIMA,W;;;;;;;AACF;AACIC,gC,GAAOC,SAAS,KAAKC,GAAL,CAAS,MAAT,CAAT,KAA8B,C;AACzC;AACA;;AACIC,gC,GAAOF,SAAS,KAAKC,GAAL,CAAS,MAAT,CAAT,KAA8B,C;AACrCE,gC,GAAO,C;AACPC,iC,GAAQ;AACRL,sCAAKA,IADG;AAERM,0CAAS;AAFD,6B;;mCAKK,KAAKC,KAAL,CAAW,MAAX,EACVF,KADU,CACJA,KADI,EAEVG,KAFU,CAEJ,iBAFI,EAGVL,IAHU,CAGLA,IAHK,EAGCC,IAHD,EAIVK,WAJU,CAIE,KAJF,C;;;AAAbC,gC;AAKAC,iC,GAAQ,E;;AACZ,iCAAQC,CAAR,GAAU,CAAV,EAAYA,IAAEF,KAAKG,UAAnB,EAA8BD,GAA9B,EAAkC;AAC9BD,sCAAMG,IAAN,CAAWF,IAAE,CAAb;AACH;AACD,iCAAKG,MAAL,CAAY,MAAZ,EAAmBL,KAAKM,IAAxB;AACA,iCAAKD,MAAL,CAAY,SAAZ,EAAsBL,KAAKO,WAA3B;AACA,iCAAKF,MAAL,CAAY,OAAZ,EAAoBJ,KAApB;AACA,iCAAKI,MAAL,CAAY,MAAZ,EAAmBf,IAAnB;6DACO,KAAKkB,OAAL,E;;;;;;;;;;;;;;;;;qBAILC,a;;;;;;;AACEC,8B,GAAK,KAAKlB,GAAL,CAAS,IAAT,C;;;mCAEY,KAAKK,KAAL,CAAW,MAAX,EAAmBF,KAAnB,CAAyB;AACtCC,0CAAS,CAD6B,EAC3Bc,IAAGA;AADwB,6BAAzB,EAEdC,IAFc,E;;;AAAbL,gC;8DAGG,KAAKM,OAAL,CAAaN,IAAb,C;;;;;8DAEA,KAAKO,IAAL,c;;;;;;;;;;;;;;;;;qBAITC,Y;;;;;;;AACEJ,8B,GAAKnB,SAAS,KAAKC,GAAL,CAAS,IAAT,CAAT,KAA4B,C;;mCAClB,KAAKK,KAAL,CAAW,MAAX,EAAmBF,KAAnB,CAAyB,EAACC,UAAS,CAAV,EAAYc,IAAGA,EAAf,EAAzB,EAA6CC,IAA7C,E;;;AAAfI,kC;;AACJ,iCAAKV,MAAL,CAAY,QAAZ,EAAqBU,MAArB;8DACO,KAAKP,OAAL,E",
+    "file": "..\\..\\..\\src\\home\\controller\\news.js",
+    "sourcesContent": [
+        "'use strict';\r\n\r\nimport Base from './base.js';\r\n\r\nexport default class extends Base {\r\n    /**\r\n     * index action\r\n     * @return {Promise} []\r\n     */\r\n    async indexAction() {\r\n        //auto render template file index_index.html\r\n        let type = parseInt(this.get('type')) || 0;\r\n        //console.log(type);\r\n        //console.log(\"----------------------------------------\")\r\n        let page = parseInt(this.get('page')) || 1;\r\n        let size = 6;\r\n        let where = {\r\n            type:type,\r\n            isdelete:0\r\n        };\r\n\r\n        let list = await this.model('news')\r\n              .where(where)\r\n              .order(\"updatetime DESC\")\r\n              .page(page, size)\r\n              .countSelect(false);\r\n        let total = [];\r\n        for(let i=0;i<list.totalPages;i++){\r\n            total.push(i+1);\r\n        }\r\n        this.assign('list',list.data);\r\n        this.assign('current',list.currentPage);\r\n        this.assign('total',total);\r\n        this.assign('type',type);\r\n        return this.display();\r\n    }\r\n\r\n\r\n    async getNewsAction() {\r\n        let id = this.get('id');\r\n        try {\r\n            let data = await this.model('news').where({\r\n                isdelete:0,id:id\r\n            }).find();\r\n            return this.success(data);\r\n        } catch (err) {\r\n            return this.fail(err);\r\n        }\r\n    }\r\n\r\n    async detailAction() {\r\n        let id = parseInt(this.get('id')) || 0;\r\n        let detail = await this.model('news').where({isdelete:0,id:id}).find();\r\n        this.assign('detail',detail);\r\n        return this.display();\r\n    }\r\n\r\n}\r\n"
+    ]
+}

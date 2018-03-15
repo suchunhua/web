@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\logout.js"
+    ],
+    "names": [
+        "init",
+        "http",
+        "__before",
+        "postAction",
+        "session",
+        "success",
+        "think",
+        "controller",
+        "rest"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AACE;;;;;mBAKAA,I,iBAAKC,I,EAAM;AACT,oCAAMD,IAAN,YAAWC,IAAX;AACD,G;;AAED;;;;;;mBAIAC,Q,uBAAW,CAEV,C;;mBAEKC,U;;;;;;;;qBACgB,KAAKC,OAAL,CAAa,OAAb,C;;;AAAhBA,qB;;qBACE,KAAKA,OAAL,E;;;+CAEC,KAAKC,OAAL,CAAa,SAAb,C;;;;;;;;;;;;;;;;;;EAtBkBC,MAAMC,UAAN,CAAiBC,I",
+    "file": "..\\..\\..\\src\\admin\\controller\\logout.js",
+    "sourcesContent": [
+        "export default class extends think.controller.rest {\r\n  /**\r\n   * init\r\n   * @param  {Object} http []\r\n   * @return {}      []\r\n   */\r\n  init(http) {\r\n    super.init(http);\r\n  }\r\n\r\n  /**\r\n   * before magic method\r\n   * @return {Promise} []\r\n   */\r\n  __before() {\r\n\r\n  }\r\n\r\n  async postAction() {\r\n    let session = await this.session('admin');\r\n    await this.session();\r\n\r\n    return this.success('success');\r\n  }\r\n}"
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\login.js"
+    ],
+    "names": [
+        "init",
+        "http",
+        "__before",
+        "postAction",
+        "username",
+        "post",
+        "password",
+        "model",
+        "where",
+        "find",
+        "admin",
+        "think",
+        "isEmpty",
+        "tokenService",
+        "service",
+        "tokenServiceInstance",
+        "createToken",
+        "userInfo",
+        "id",
+        "name",
+        "token",
+        "header",
+        "success",
+        "data",
+        "fail",
+        "controller",
+        "rest"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AACE;;;;;mBAKAA,I,iBAAKC,I,EAAM;AACT,oCAAMD,IAAN,YAAWC,IAAX;AACD,G;;AAED;;;;;;mBAIAC,Q,uBAAW,CAEV,C;;mBAEKC,U;;;;;;;AACAC,sB,GAAW,KAAKC,IAAL,CAAU,UAAV,C;AACXC,sB,GAAW,KAAKD,IAAL,CAAU,UAAV,C;;qBAEG,KAAKE,KAAL,CAAW,OAAX,EACPC,KADO,CACD,EAACJ,UAAUA,QAAX,EAAoBE,UAASA,QAA7B,EADC,EAEPG,IAFO,E;;;AAAdC,mB;;kBAIEC,MAAMC,OAAN,CAAcF,KAAd,C;;;;;AACJ;AACIG,0B,GAAeF,MAAMG,OAAN,CAAc,OAAd,C;AACfC,kC,GAAuB,IAAIF,YAAJ,E;AAC3B;;;qBACkBE,qBAAqBC,WAArB,CAAiC;AACjDC,0BAAU;AACRC,sBAAIR,MAAMQ,EADF;AAERC,wBAAMT,MAAMN;AAFJ;AADuC,eAAjC,C;;;AAAdgB,mB;;AAMJ;AACA,mBAAKnB,IAAL,CAAUoB,MAAV,CAAiB,OAAjB,EAA0BD,KAA1B;AACA;AACA;+CACO,KAAKE,OAAL,CAAa,EAACF,OAAMA,KAAP,EAAaG,MAAK,EAACL,IAAIR,MAAMQ,EAAX;AAClCC,wBAAMT,MAAMN,QADsB,EAAlB,EAAb,C;;;+CAIA,KAAKoB,IAAL,CAAU,aAAV,C;;;;;;;;;;;;;;;;;;EA7CgBb,MAAMc,UAAN,CAAiBC,I;;;AAgD7C",
+    "file": "..\\..\\..\\src\\admin\\controller\\login.js",
+    "sourcesContent": [
+        "export default class extends think.controller.rest {\r\n  /**\r\n   * init\r\n   * @param  {Object} http []\r\n   * @return {}      []\r\n   */\r\n  init(http) {\r\n    super.init(http);\r\n  }\r\n\r\n  /**\r\n   * before magic method\r\n   * @return {Promise} []\r\n   */\r\n  __before() {\r\n\r\n  }\r\n\r\n  async postAction() {\r\n    let username = this.post('username');\r\n    let password = this.post('password');\r\n\r\n    let admin = await this.model('admin')\r\n              .where({username: username,password:password})\r\n              .find();\r\n    // console.log(admin);\r\n     if (!think.isEmpty(admin)) {\r\n      //调用tokenservice中间件\r\n      let tokenService = think.service(\"token\");\r\n      let tokenServiceInstance = new tokenService();\r\n      //写入token\r\n      let token = await tokenServiceInstance.createToken({\r\n        userInfo: {\r\n          id: admin.id,\r\n          name: admin.username\r\n        }\r\n      });\r\n      //传输客户端token\r\n      this.http.header(\"token\", token);\r\n      // this.session(token,admin);\r\n      // console.log(this.session);\r\n      return this.success({token:token,data:{id: admin.id,\r\n          name: admin.username}});\r\n\r\n    } else {\r\n      return this.fail(\"LOGIN_ERROR\");\r\n    }\r\n  }\r\n};"
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\home\\controller\\join.js"
+    ],
+    "names": [
+        "indexAction",
+        "action",
+        "get",
+        "console",
+        "log",
+        "assign",
+        "display"
+    ],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;qBAGIA,W,0BAAc;AACV,YAAIC,SAAS,KAAKC,GAAL,CAAS,QAAT,CAAb;AACAC,gBAAQC,GAAR,CAAYH,MAAZ;AACA,aAAKI,MAAL,CAAY,QAAZ,EAAsBJ,MAAtB;AACA,eAAO,KAAKK,OAAL,EAAP;AACH,K",
+    "file": "..\\..\\..\\src\\home\\controller\\join.js",
+    "sourcesContent": [
+        "'use strict';\n\nimport Base from './base.js';\nexport default class extends Base {\n\n    indexAction() {\n        let action = this.get('action');\n        console.log(action);\n        this.assign('action', action);\n        return this.display();\n    }\n}\n"
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\boss.js"
+    ],
+    "names": [
+        "getAction",
+        "think",
+        "isEmpty",
+        "get",
+        "post",
+        "detail",
+        "list",
+        "where",
+        "type",
+        "id",
+        "model",
+        "find",
+        "boss",
+        "success",
+        "select",
+        "postAction",
+        "fail",
+        "add",
+        "update"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;;;;;;;;;mBAIQA,S;;;;;;AACJ,kBAAI,CAACC,MAAMC,OAAN,CAAc,KAAKC,GAAL,CAAS,IAAT,CAAd,CAAD,IAAkC,CAACF,MAAMC,OAAN,CAAc,KAAKE,IAAL,CAAU,MAAV,CAAd,CAAvC,EAAyE;AACvE,qBAAKC,MAAL;AACD,eAFD,MAEO;AACL,qBAAKC,IAAL;AACD;;;;;;;;;;;;;;;;;mBAGGD,M;;;;;;;AACDE,mB,GAAQ,E;;AACZ,kBAAG,KAAKH,IAAL,CAAU,MAAV,CAAH,EAAqB;AACpBG,wBAAQ,EAACC,MAAK,KAAKL,GAAL,CAAS,MAAT,CAAN,EAAR;AACA,eAFD,MAEO,IAAG,KAAKA,GAAL,CAAS,IAAT,CAAH,EAAkB;AACxBI,wBAAQ,EAACE,IAAG,KAAKN,GAAL,CAAS,IAAT,CAAJ,EAAR;AACA;;qBACgB,KAAKO,KAAL,CAAW,MAAX,EACfH,KADe,CACTA,KADS,EACFI,IADE,E;;;AAAbC,kB;gDAGG,KAAKC,OAAL,CAAaD,IAAb,C;;;;;;;;;;;;;;;;;mBAGFN,I;;;;;;;;qBAEY,KAAKI,KAAL,CAAW,MAAX,EAAmBI,MAAnB,E;;;AAAbR,kB;gDACG,KAAKO,OAAL,CAAaP,IAAb,C;;;;;;;;;;;;;;;;;mBAGFS,U;;;;;;;oBACF,CAAC,KAAKX,IAAL,CAAU,IAAV,CAAD,IAAoB,CAAC,KAAKA,IAAL,CAAU,MAAV,C;;;;;gDAChB,KAAKY,IAAL,CAAU,oBAAV,C;;;;qBAES,KAAKN,KAAL,CAAW,MAAX,EACfH,KADe,CACT,EAACC,MAAK,KAAKJ,IAAL,CAAU,MAAV,CAAN,EADS,EACiBO,IADjB,E;;;AAAbC,kB;;kBAEAA,I;;;;;;qBACU,KAAKF,KAAL,CAAW,MAAX,EAAmBO,GAAnB,CAAuB,KAAKb,IAAL,EAAvB,C;;;AAAbQ,kB;;;;;oBACQA,KAAKH,EAAL,IAAW,KAAKL,IAAL,CAAU,IAAV,C;;;;;;qBAEN,KAAKM,KAAL,CAAW,MAAX,EAAmBQ,MAAnB,CAA0B,KAAKd,IAAL,EAA1B,C;;;AAAbQ,kB;;;;;gDAEO,KAAKI,IAAL,CAAU,mBAAV,C;;;gDAGD,KAAKH,OAAL,CAAaD,IAAb,C",
+    "file": "..\\..\\..\\src\\admin\\controller\\boss.js",
+    "sourcesContent": [
+        "import Base from './base.js';\r\n\r\nexport default class extends Base {\r\n\r\n  async getAction() {\r\n    if (!think.isEmpty(this.get(\"id\")) || !think.isEmpty(this.post('type'))) {\r\n      this.detail();\r\n    } else {\r\n      this.list();\r\n    }\r\n  }\r\n\r\n  async detail() {\r\n  \tlet where = {};\r\n  \tif(this.post('type')){\r\n  \t\twhere = {type:this.get('type')};\r\n  \t} else if(this.get('id')){\r\n  \t\twhere = {id:this.get('id')};\r\n  \t}\r\n  \tlet boss = await this.model('boss')\r\n  \t\t.where(where).find();\r\n\r\n  \treturn this.success(boss);\r\n  }\r\n\r\n  async list() {\r\n\r\n  \tlet list = await this.model('boss').select();\r\n  \treturn this.success(list);\r\n  }\r\n\r\n  async postAction() {\r\n  \tif(!this.post('id') && !this.post('type')){\r\n  \t\treturn this.fail('ADMIN_PARAM_LACKED');\r\n  \t}\r\n  \tlet boss = await this.model('boss')\r\n  \t\t.where({type:this.post('type')}).find();\r\n  \tif(!boss){\r\n  \t\tboss = await this.model('boss').add(this.post());\r\n  \t}else if(boss.id == this.post('id')){\r\n  \t\t//修改\r\n  \t\tboss = await this.model('boss').update(this.post());\r\n  \t}else{\r\n  \t\treturn this.fail('ADMIN_PARAM_ERROR');\r\n  \t}\r\n\r\n  \treturn this.success(boss);\r\n  }\r\n\r\n\r\n}"
+    ]
+}

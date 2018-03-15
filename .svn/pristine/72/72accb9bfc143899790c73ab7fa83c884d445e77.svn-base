@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\hook.js"
+    ],
+    "names": [
+        "request_begin"
+    ],
+    "mappings": "AAAA;;AAEA;;;;;;kBAIe;AACdA,iBAAe,CAAC,MAAD;AADD,C",
+    "file": "..\\..\\..\\src\\common\\config\\hook.js",
+    "sourcesContent": [
+        "'use strict';\n\n/**\n * hook config\n * https://thinkjs.org/doc/middleware.html#toc-df6\n */\nexport default {\n\trequest_begin: ['cors']\n}"
+    ]
+}

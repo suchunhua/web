@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\..\\src\\common\\config\\env\\production.js"
+    ],
+    "names": [
+        "resource_on",
+        "port"
+    ],
+    "mappings": "AAAA;;;kBAEe;AACbA,eAAa,IADA;AAEbC,QAAM;AAFO,C",
+    "file": "..\\..\\..\\..\\src\\common\\config\\env\\production.js",
+    "sourcesContent": [
+        "'use strict';\n\nexport default {\n  resource_on: true,\n  port: 8364\n};"
+    ]
+}

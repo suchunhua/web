@@ -1,0 +1,28 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\home\\controller\\index.js"
+    ],
+    "names": [
+        "indexAction",
+        "news",
+        "model",
+        "where",
+        "isdelete",
+        "type",
+        "order",
+        "limit",
+        "select",
+        "status",
+        "assign",
+        "display",
+        "cleancookieAction",
+        "cookie",
+        "redirect"
+    ],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;AAGE;;;;mBAIMA,W;;;;;;;AACJ;;AAEIC,kB,GAAO,KAAKC,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB,EAACC,UAAS,CAAV,EAAYC,MAAK,CAAjB,EAAzB,EAA8CC,KAA9C,CAAoD,iBAApD,EAAuEC,KAAvE,CAA6E,CAA7E,EAAgFC,MAAhF,E;AACPC,oB,GAAS,KAAKP,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB,EAACC,UAAS,CAAV,EAAYC,MAAK,CAAjB,EAAzB,EAA8CC,KAA9C,CAAoD,iBAApD,EAAuEC,KAAvE,CAA6E,CAA7E,EAAgFC,MAAhF,E;;AACb,mBAAKE,MAAL,CAAY,MAAZ,EAAmBT,IAAnB;AACA,mBAAKS,MAAL,CAAY,QAAZ,EAAqBD,MAArB;;+CAEO,KAAKE,OAAL,E;;;;;;;;;;;;;;;;;mBAEHC,iB;;;;;;AACJ,mBAAKC,MAAL,CAAY,MAAZ,EAAoB,IAApB;AACA,mBAAKA,MAAL,CAAY,OAAZ,EAAqB,IAArB;AACA,mBAAKA,MAAL,CAAY,OAAZ,EAAqB,IAArB;gDACO,KAAKC,QAAL,CAAc,cAAd,C",
+    "file": "..\\..\\..\\src\\home\\controller\\index.js",
+    "sourcesContent": [
+        "'use strict';\n\nimport Base from './base.js';\n\nexport default class extends Base {\n  /**\n   * index action\n   * @return {Promise} []\n   */\n  async indexAction(){\n    //auto render template file index_index.html\n    \n    let news = this.model('news').where({isdelete:0,type:0}).order(\"updatetime DESC\").limit(3).select();\n    let status = this.model('news').where({isdelete:0,type:1}).order(\"updatetime DESC\").limit(3).select(); \n    this.assign('news',news);\n    this.assign('status',status);\n    \n    return this.display();\n  }\n  async cleancookieAction(){\n    this.cookie(\"name\", null);\n    this.cookie(\"phone\", null);\n    this.cookie(\"email\", null);\n    return this.redirect(\"/index/index\");\n  }\n}"
+    ]
+}

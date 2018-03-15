@@ -1,0 +1,38 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\science.js"
+    ],
+    "names": [
+        "getAction",
+        "think",
+        "isEmpty",
+        "get",
+        "detail",
+        "list",
+        "model",
+        "where",
+        "id",
+        "find",
+        "scientist",
+        "success",
+        "page",
+        "size",
+        "isdelete",
+        "name",
+        "order",
+        "countSelect",
+        "postAction",
+        "post",
+        "education",
+        "image",
+        "fail",
+        "add",
+        "update"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;;;;;;;;;kBAIOA,S;;;;;;AACL,WAAI,CAACC,MAAMC,OAAN,CAAc,KAAKC,GAAL,CAAS,IAAT,CAAd,CAAL,EAAoC;AAC/B,aAAKC,MAAL;AACD,QAFJ,MAEU;AACL,aAAKC,IAAL;AACD;;;;;;;;;;;;;;;;;kBAGCD,M;;;;;;;;cACkB,KAAKE,KAAL,CAAW,iBAAX,EACjBC,KADiB,CACX,EAACC,IAAI,KAAKL,GAAL,CAAS,IAAT,CAAL,EADW,EACWM,IADX,E;;;AAAnBC,gB;yCAEM,KAAKC,OAAL,CAAaD,SAAb,C;;;;;;;;;;;;;;;;;kBAGLL,I;;;;;;;AACDO,W,GAAO,KAAKT,GAAL,CAAS,MAAT,KAAoB,C;AACxBU,W,GAAO,KAAKV,GAAL,CAAS,MAAT,KAAoB,E;AAC3BI,Y,GAAQ;AACXO,kBAAS;AADE,Q;;AAGZ,WAAG,KAAKX,GAAL,CAAS,KAAT,CAAH,EAAmB;AAClBI,cAAMQ,IAAN,GAAa,CAAC,MAAD,EAAQ,MAAK,KAAKZ,GAAL,CAAS,KAAT,CAAL,GAAsB,GAA9B,CAAb;AACA;;cACgB,KAAKG,KAAL,CAAW,iBAAX,EACdC,KADc,CACRA,KADQ,EAEdS,KAFc,CAER,iBAFQ,EAGdJ,IAHc,CAGTA,IAHS,EAGHC,IAHG,EAIdI,WAJc,CAIF,KAJE,C;;;AAAbZ,W;yCAMG,KAAKM,OAAL,CAAaN,IAAb,C;;;;;;;;;;;;;;;;;kBAGLa,U;;;;;;;AACDV,S,GAAK,KAAKW,IAAL,CAAU,IAAV,C;AACFJ,W,GAAO,KAAKI,IAAL,CAAU,MAAV,C;AACPC,gB,GAAY,KAAKD,IAAL,CAAU,WAAV,C;AACZE,Y,GAAQ,KAAKF,IAAL,CAAU,OAAV,C;;aACTlB,MAAMC,OAAN,CAAca,IAAd,KAAuBd,MAAMC,OAAN,CAAckB,SAAd,CAAvB,IAAmDnB,MAAMC,OAAN,CAAcmB,KAAd,C;;;;;yCAC7C,KAAKC,IAAL,CAAU,oBAAV,C;;;YAENrB,MAAMC,OAAN,CAAcM,EAAd,C;;;;;sBACM,I;;cAAmB,KAAKF,KAAL,CAAW,iBAAX,EAA8BiB,GAA9B,CAAkC,KAAKJ,IAAL,EAAlC,C;;;;sDAAdR,O;;;sBAGL,I;;cAAmB,KAAKL,KAAL,CAAW,iBAAX,EAA8BkB,MAA9B,CAAqC,KAAKL,IAAL,EAArC,C;;;;sDAAdR,O",
+    "file": "..\\..\\..\\src\\admin\\controller\\science.js",
+    "sourcesContent": [
+        "import Base from './base.js';\r\n\r\nexport default class extends Base {\r\n\r\n\tasync getAction() {\r\n\t\tif (!think.isEmpty(this.get(\"id\"))) {\r\n\t      this.detail();\r\n\t    } else {\r\n\t      this.list();\r\n\t    }\r\n\t}\r\n\r\n\tasync detail() {\r\n\t\tlet scientist  = await this.model('science_advisor')\r\n\t      .where({id: this.get(\"id\")}).find();\r\n\t    return this.success(scientist );\r\n\t}\r\n\r\n\tasync list() {\r\n\t\tlet page = this.get('page') || 1;\r\n\t    let size = this.get('size') || 10;\r\n\t    let where = {\r\n\t    \tisdelete:0\r\n\t    };\r\n\t    if(this.get('key')){\r\n\t    \twhere.name = ['like','%'+ this.get('key') +'%'];\r\n\t    }\r\n\t    let list = await this.model('science_advisor')\r\n\t      .where(where)\r\n\t      .order(\"updatetime DESC\")\r\n\t      .page(page, size)\r\n\t      .countSelect(false);\r\n\r\n\t    return this.success(list);\r\n\t}\r\n\r\n\tasync postAction(){\r\n\t\tlet id = this.post('id'); \r\n\t    let name = this.post('name');\r\n\t    let education = this.post('education');\r\n\t    let image = this.post('image');\r\n\t    if(think.isEmpty(name) || think.isEmpty(education) || think.isEmpty(image) ){\r\n\t      return this.fail('ADMIN_PARAM_LACKED');\r\n\t    }\r\n\t    if(think.isEmpty(id)){\r\n\t      return this.success(await this.model('science_advisor').add(this.post()));\r\n\t    }else{\r\n\t      //修改\r\n\t      return this.success(await this.model('science_advisor').update(this.post()));\r\n\t    }\r\n\t}\r\n  \r\n\r\n\r\n\r\n}"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\config.js"
+    ],
+    "names": [
+        "resource_on",
+        "resource_reg",
+        "route_on",
+        "secret",
+        "cors",
+        "origin",
+        "methods",
+        "preflightContinue"
+    ],
+    "mappings": "AAAA;AACA;;;;;kBAGe;AACb;AACAA,eAAa,IAFA,EAEM;AACnBC,gBAAc,qCAHD,EAGwC;AACrDC,YAAU,IAJG,EAIM;AACnBC,UAAO,UALM;AAMbC,QAAM;AACJC,YAAQ,GADJ;AAEJC,aAAS,gCAFL;AAGJC,uBAAmB;AAHf;AANO,C",
+    "file": "..\\..\\..\\src\\common\\config\\config.js",
+    "sourcesContent": [
+        "'use strict';\n/**\n * config\n */\nexport default {\n  //key: value\n  resource_on: true, //是否开启静态资源解析功能\n  resource_reg: /^(static\\/|[^\\/]+\\.(?!js|html)\\w+$)/, //判断为静态资源请求的正则\n  route_on: true,    // 自定义路由\n  secret:'`A*7WMHO',\n  cors: {\n    origin: '*',\n    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',\n    preflightContinue: false\n  }\n};"
+    ]
+}

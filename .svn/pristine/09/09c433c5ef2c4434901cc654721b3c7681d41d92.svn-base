@@ -1,0 +1,590 @@
+'use strict';
+
+exports.__esModule = true;
+
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _map = require('babel-runtime/core-js/map');
+
+var _map2 = _interopRequireDefault(_map);
+
+var _connbase = require('./connbase.js');
+
+var _connbase2 = _interopRequireDefault(_connbase);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var userMap = new _map2.default();
+var md5 = require("blueimp-md5");
+
+var _class = function (_ConnBase) {
+	(0, _inherits3.default)(_class, _ConnBase);
+
+	function _class() {
+		var _temp, _this, _ret;
+
+		(0, _classCallCheck3.default)(this, _class);
+
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
+
+		return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, _ConnBase.call.apply(_ConnBase, [this].concat(args))), _this), _this.serverUrl = '/elws/services/authapi', _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	}
+
+	// admin add user 
+	_class.prototype.addUser = function () {
+		var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(senderId, username, password, phone, email, realName, userRole) {
+			var user, hashpwd, path;
+			return _regenerator2.default.wrap(function _callee$(_context) {
+				while (1) {
+					switch (_context.prev = _context.next) {
+						case 0:
+							user = userMap.get(senderId);
+
+							if (!(user != null)) {
+								_context.next = 11;
+								break;
+							}
+
+							hashpwd = this.hash(password);
+							path = this.serverUrl + '/createUser?' + 'senderId=' + senderId + '&secToken=' + user.secToken + '&name=' + username + '&password=' + hashpwd + '&userRole=' + userRole + '&cardId=null';
+
+							if (realName != null) {
+								path += '&realName=' + realName;
+							}
+							if (email != null) {
+								path += '&email=' + email;
+							}
+							if (phone != null) {
+								path += '&phone=' + phone;
+							}
+
+							this.updatePath(path);
+							return _context.abrupt('return', this.sendRequest());
+
+						case 11:
+							return _context.abrupt('return', this.localError({ "errorCode": 100, "errorMsg": "用户没有登录" }));
+
+						case 12:
+						case 'end':
+							return _context.stop();
+					}
+				}
+			}, _callee, this);
+		}));
+
+		function addUser(_x, _x2, _x3, _x4, _x5, _x6, _x7) {
+			return _ref.apply(this, arguments);
+		}
+
+		return addUser;
+	}();
+
+	//update user information
+
+
+	_class.prototype.updateUserInfor = function () {
+		var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(senderId, infor, cardId, disabled, code) {
+			var user, realName, email, phone, userRole, hashpwd, path;
+			return _regenerator2.default.wrap(function _callee2$(_context2) {
+				while (1) {
+					switch (_context2.prev = _context2.next) {
+						case 0:
+							user = userMap.get(senderId);
+
+							console.log("============updateUserInfor start==================");
+							console.log(infor);
+							realName = infor.realName;
+							email = infor.email;
+							phone = infor.phone;
+							userRole = infor.userRole;
+
+							if (!(user != null)) {
+								_context2.next = 21;
+								break;
+							}
+
+							hashpwd = this.hash(infor.password);
+							path = this.serverUrl + '/updateUser?' + 'senderId=' + senderId + '&secToken=' + user.secToken + '&userId=' + infor.userId + '&name=' + infor.name + '&password=' + hashpwd;
+
+							if (realName != null) {
+								path += '&realName=' + realName;
+							}
+							if (email != null) {
+								path += '&email=' + email;
+							}
+							if (phone != null) {
+								path += '&phone=' + phone;
+							}
+							if (cardId != null) {
+								path += '&cardId=' + cardId;
+							}
+							if (userRole != null) {
+								path += '&userRole=' + userRole;
+							}
+							if (code != null) {
+								path += '&vCode=' + code;
+							}
+							if (disabled != null) {
+								path += '&disabled=' + disabled;
+							}
+							this.updatePath(path);
+							return _context2.abrupt('return', this.sendRequest());
+
+						case 21:
+							return _context2.abrupt('return', this.localError({ "errorCode": 100, "errorMsg": "用户没有登录" }));
+
+						case 22:
+						case 'end':
+							return _context2.stop();
+					}
+				}
+			}, _callee2, this);
+		}));
+
+		function updateUserInfor(_x8, _x9, _x10, _x11, _x12) {
+			return _ref2.apply(this, arguments);
+		}
+
+		return updateUserInfor;
+	}();
+
+	//judge phone exitence
+
+	_class.prototype.phoneTest = function () {
+		var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(phoneNum) {
+			return _regenerator2.default.wrap(function _callee3$(_context3) {
+				while (1) {
+					switch (_context3.prev = _context3.next) {
+						case 0:
+							//var user = userMap.get(senderId);
+							//if(user != null){
+							this.updatePath(this.serverUrl + '/getUserList?' + 'senderId=0' + '&secToken=' + '&phone=' + phoneNum);
+							return _context3.abrupt('return', this.sendRequest());
+
+						case 2:
+						case 'end':
+							return _context3.stop();
+					}
+				}
+			}, _callee3, this);
+		}));
+
+		function phoneTest(_x13) {
+			return _ref3.apply(this, arguments);
+		}
+
+		return phoneTest;
+	}();
+
+	//api interface
+
+
+	_class.prototype.login = function () {
+		var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(username, password) {
+			var hashpwd;
+			return _regenerator2.default.wrap(function _callee4$(_context4) {
+				while (1) {
+					switch (_context4.prev = _context4.next) {
+						case 0:
+							hashpwd = this.hash(password);
+
+							console.log("hash=" + hashpwd + "|" + password);
+							this.updatePath(this.serverUrl + '/login?' + 'name=' + username + '&password=' + hashpwd);
+							return _context4.abrupt('return', this.sendRequest());
+
+						case 4:
+						case 'end':
+							return _context4.stop();
+					}
+				}
+			}, _callee4, this);
+		}));
+
+		function login(_x14, _x15) {
+			return _ref4.apply(this, arguments);
+		}
+
+		return login;
+	}();
+
+	_class.prototype.createUser = function () {
+		var _ref5 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee5(name, password, realName, email, phone) {
+			var name1, realName1, hashpwd, path;
+			return _regenerator2.default.wrap(function _callee5$(_context5) {
+				while (1) {
+					switch (_context5.prev = _context5.next) {
+						case 0:
+							//var user = userMap.get(senderId);
+							//if(user != null){
+							name1 = encodeURIComponent(name, "UTF-8");
+							realName1 = encodeURIComponent(realName, "UTF-8");
+							hashpwd = this.hash(password);
+							path = this.serverUrl + '/createUser?' + 'senderId=5' + '&secToken=' + '&name=' + name1 + '&password=' + hashpwd + '&userRole=patient';
+
+							if (realName != null) {
+								path += '&realName=' + realName1;
+							}
+							if (email != null) {
+								path += '&email=' + email;
+							}
+							if (phone != null) {
+								path += '&phone=' + phone;
+							}
+
+							this.updatePath(path);
+							return _context5.abrupt('return', this.sendRequest());
+
+						case 9:
+						case 'end':
+							return _context5.stop();
+					}
+				}
+			}, _callee5, this);
+		}));
+
+		function createUser(_x16, _x17, _x18, _x19, _x20) {
+			return _ref5.apply(this, arguments);
+		}
+
+		return createUser;
+	}();
+
+	_class.prototype.updateUser = function () {
+		var _ref6 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee6(name, password, vCode, phone, realName, email, userRole, cardId, disabled) {
+			var user, hashpwd, path;
+			return _regenerator2.default.wrap(function _callee6$(_context6) {
+				while (1) {
+					switch (_context6.prev = _context6.next) {
+						case 0:
+							user = userMap.get(senderId);
+							//if(user != null){
+
+							hashpwd = this.hash(password);
+							path = this.serverUrl + '/updateUser?' + 'senderId=8' + '&secToken=9' + '&name=' + name + '&password=' + hashpwd;
+							/*if( realName != null){ 
+       	path += '&realName=' + realName;
+       }
+       if( email != null){ 
+       	path += '&email=' + email;
+       }
+       if( phone != null){ 
+       	path += '&phone=' + phone;
+       }
+       if( cardId != null){ 
+       	path += '&cardId=' + cardId;
+       }
+       if( userRole != null){ 
+       	path += '&userRole=' + userRole;
+       }
+       if( vCode != null){ 
+       	path += '&vCode=' + vCode;
+       }
+       if( disabled != null){ 
+       	path += '&disabled=' + disabled;
+       }*/
+
+							this.updatePath(path);
+
+							return _context6.abrupt('return', this.sendRequest());
+
+						case 5:
+						case 'end':
+							return _context6.stop();
+					}
+				}
+			}, _callee6, this);
+		}));
+
+		function updateUser(_x21, _x22, _x23, _x24, _x25, _x26, _x27, _x28, _x29) {
+			return _ref6.apply(this, arguments);
+		}
+
+		return updateUser;
+	}();
+
+	_class.prototype.updatePassword = function () {
+		var _ref7 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee7(name, password, phone, vCode) {
+			var hashpwd;
+			return _regenerator2.default.wrap(function _callee7$(_context7) {
+				while (1) {
+					switch (_context7.prev = _context7.next) {
+						case 0:
+							hashpwd = this.hash(password);
+
+
+							this.updatePath(this.serverUrl + '/updateUser?' + 'senderId=8' + '&secToken=9' + '&name=' + name + '&password=' + hashpwd + '&phone=' + phone + '&vCode=' + vCode + '&cardId=' + '&role=' + '&disabled=' + '&userId=');
+							return _context7.abrupt('return', this.sendRequest());
+
+						case 3:
+						case 'end':
+							return _context7.stop();
+					}
+				}
+			}, _callee7, this);
+		}));
+
+		function updatePassword(_x30, _x31, _x32, _x33) {
+			return _ref7.apply(this, arguments);
+		}
+
+		return updatePassword;
+	}();
+
+	_class.prototype.deleteUser = function () {
+		var _ref8 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee8(senderId, userId) {
+			var user;
+			return _regenerator2.default.wrap(function _callee8$(_context8) {
+				while (1) {
+					switch (_context8.prev = _context8.next) {
+						case 0:
+							console.log(senderId + '======' + userId);
+
+							user = userMap.get(senderId);
+
+							console.log("========" + user.secToken);
+
+							if (!(user != null)) {
+								_context8.next = 8;
+								break;
+							}
+
+							this.updatePath(this.serverUrl + '/deleteUser?' + 'senderId=' + senderId + '&secToken=' + user.secToken + '&userId=' + userId);
+							return _context8.abrupt('return', this.sendRequest());
+
+						case 8:
+							return _context8.abrupt('return', this.localError({ "errorCode": 100, "errorMsg": "用户没有登录" }));
+
+						case 9:
+						case 'end':
+							return _context8.stop();
+					}
+				}
+			}, _callee8, this);
+		}));
+
+		function deleteUser(_x34, _x35) {
+			return _ref8.apply(this, arguments);
+		}
+
+		return deleteUser;
+	}();
+
+	_class.prototype.disableUser = function () {
+		var _ref9 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee9(senderId, userId, flag) {
+			var user;
+			return _regenerator2.default.wrap(function _callee9$(_context9) {
+				while (1) {
+					switch (_context9.prev = _context9.next) {
+						case 0:
+							user = userMap.get(senderId);
+
+							if (!(user != null)) {
+								_context9.next = 6;
+								break;
+							}
+
+							this.updatePath(this.serverUrl + '/disableUser?' + 'senderId=' + senderId + '&secToken=' + user.secToken + '&userId=' + userId + '&flag=' + flag);
+							return _context9.abrupt('return', this.sendRequest());
+
+						case 6:
+							return _context9.abrupt('return', this.localError({ "errorCode": 100, "errorMsg": "用户没有登录" }));
+
+						case 7:
+						case 'end':
+							return _context9.stop();
+					}
+				}
+			}, _callee9, this);
+		}));
+
+		function disableUser(_x36, _x37, _x38) {
+			return _ref9.apply(this, arguments);
+		}
+
+		return disableUser;
+	}();
+
+	_class.prototype.getUser = function () {
+		var _ref10 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee10(senderId, userId) {
+			var user;
+			return _regenerator2.default.wrap(function _callee10$(_context10) {
+				while (1) {
+					switch (_context10.prev = _context10.next) {
+						case 0:
+							user = userMap.get(senderId);
+
+							if (!(user != null)) {
+								_context10.next = 6;
+								break;
+							}
+
+							this.updatePath(this.serverUrl + '/getUser?' + 'senderId=' + senderId + '&secToken=' + user.secToken + '&userId=' + userId);
+							return _context10.abrupt('return', this.sendRequest());
+
+						case 6:
+							return _context10.abrupt('return', this.localError({ "errorCode": 100, "errorMsg": "用户没有登录" }));
+
+						case 7:
+						case 'end':
+							return _context10.stop();
+					}
+				}
+			}, _callee10, this);
+		}));
+
+		function getUser(_x39, _x40) {
+			return _ref10.apply(this, arguments);
+		}
+
+		return getUser;
+	}();
+
+	_class.prototype.sendShortMsgCode = function () {
+		var _ref11 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee11(senderId, type, key) {
+			return _regenerator2.default.wrap(function _callee11$(_context11) {
+				while (1) {
+					switch (_context11.prev = _context11.next) {
+						case 0:
+							//var user = userMap.get(senderId);
+							//if(user != null){
+							console.log(senderId + "|" + key + "|" + type + "|");
+							this.updatePath(this.serverUrl + '/sendShortMsgCode?' + 'senderId=' + senderId + '&secToken=' + '&type=' + type + '&key=' + key);
+							return _context11.abrupt('return', this.sendRequest());
+
+						case 3:
+						case 'end':
+							return _context11.stop();
+					}
+				}
+			}, _callee11, this);
+		}));
+
+		function sendShortMsgCode(_x41, _x42, _x43) {
+			return _ref11.apply(this, arguments);
+		}
+
+		return sendShortMsgCode;
+	}();
+
+	_class.prototype.verificationCode = function () {
+		var _ref12 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee12(key, code) {
+			return _regenerator2.default.wrap(function _callee12$(_context12) {
+				while (1) {
+					switch (_context12.prev = _context12.next) {
+						case 0:
+							//var user = userMap.get(senderId);
+							//if(user != null){
+							this.updatePath(this.serverUrl + '/verificationCode?' + 'senderId=0' + '&secToken=123' + '&key=' + key + '&code=' + code);
+							return _context12.abrupt('return', this.sendRequest());
+
+						case 2:
+						case 'end':
+							return _context12.stop();
+					}
+				}
+			}, _callee12, this);
+		}));
+
+		function verificationCode(_x44, _x45) {
+			return _ref12.apply(this, arguments);
+		}
+
+		return verificationCode;
+	}();
+
+	_class.prototype.getUserList = function () {
+		var _ref13 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee13(senderId, phoneNum) {
+			var user;
+			return _regenerator2.default.wrap(function _callee13$(_context13) {
+				while (1) {
+					switch (_context13.prev = _context13.next) {
+						case 0:
+							user = userMap.get(senderId);
+
+							if (!(user != null)) {
+								_context13.next = 6;
+								break;
+							}
+
+							this.updatePath(this.serverUrl + '/getUserList?' + 'senderId=' + senderId + '&secToken=' + user.secToken);
+							return _context13.abrupt('return', this.sendRequest());
+
+						case 6:
+							return _context13.abrupt('return', this.localError({ "errorCode": 100, "errorMsg": "用户没有登录" }));
+
+						case 7:
+						case 'end':
+							return _context13.stop();
+					}
+				}
+			}, _callee13, this);
+		}));
+
+		function getUserList(_x46, _x47) {
+			return _ref13.apply(this, arguments);
+		}
+
+		return getUserList;
+	}();
+
+	//utilitize methods
+
+
+	_class.setUser = function setUser(userInfo) {
+		var userId = userInfo.userId;
+		console.log(userInfo.userId + "|" + userInfo.secToken + "|||");
+		console.log("[type]" + (typeof userId === 'undefined' ? 'undefined' : (0, _typeof3.default)(userId)));
+		if (userId != null && typeof userId == "number") {
+			userId = "" + userId;
+		}
+		userMap.set(userId, userInfo);
+	};
+
+	_class.getUser = function getUser(userId) {
+		var u = userMap.get(userId);
+		console.log("|" + u.userId + "|" + u.secToken + "--");
+		return u;
+	};
+
+	_class.prototype.hash = function hash(data) {
+		var hs = md5(data);
+		var sbhash = hs.substring(8, 24);
+		var resv = "";
+
+		for (var i = sbhash.length; i >= 1; i--) {
+			resv += sbhash.charAt(i - 1);
+		}
+
+		console.log("hash=" + hs + "|" + sbhash + "|" + sbhash.length + "|" + resv);
+		return resv;
+	};
+
+	return _class;
+}(_connbase2.default);
+
+exports.default = _class;
+//# sourceMappingURL=usermgr.js.map

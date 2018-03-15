@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\home\\controller\\iframe.js"
+    ],
+    "names": [
+        "indexAction",
+        "display",
+        "cleancookieAction",
+        "redirect"
+    ],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;AAGE;;;;mBAIMA,W;;;;;;+CAKG,KAAKC,OAAL,E;;;;;;;;;;;;;;;;;mBAEHC,iB;;;;;;gDAEG,KAAKC,QAAL,CAAc,cAAd,C",
+    "file": "..\\..\\..\\src\\home\\controller\\iframe.js",
+    "sourcesContent": [
+        "'use strict';\r\n\r\nimport Base from './base.js';\r\n\r\nexport default class extends Base {\r\n  /**\r\n   * index action\r\n   * @return {Promise} []\r\n   */\r\n  async indexAction(){\r\n    //auto render template file index_index.html\r\n    \r\n   \r\n    \r\n    return this.display();\r\n  }\r\n  async cleancookieAction(){\r\n   \r\n    return this.redirect(\"/index/index\");\r\n  }\r\n}"
+    ]
+}

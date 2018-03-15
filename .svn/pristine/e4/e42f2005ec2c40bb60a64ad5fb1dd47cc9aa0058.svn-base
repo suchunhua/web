@@ -1,0 +1,24 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\db.js"
+    ],
+    "names": [
+        "type",
+        "adapter",
+        "mysql",
+        "host",
+        "port",
+        "database",
+        "user",
+        "password",
+        "prefix",
+        "encoding",
+        "mongo"
+    ],
+    "mappings": "AAAA;AACA;;;;;;kBAIe;AACbA,QAAM,OADO;AAEbC,WAAS;AACPC,WAAO;AACLC,YAAM,8CADD;AAELC,YAAM,MAFD;AAGLC,gBAAU,iBAHL;AAILC,YAAM,QAJD;AAKLC,gBAAU,UALL;AAMLC,cAAQ,EANH;AAOLC,gBAAU;AAPL,KADA;AAUPC,WAAO;AAVA;AAFI,C",
+    "file": "..\\..\\..\\src\\common\\config\\db.js",
+    "sourcesContent": [
+        "'use strict';\n/**\n * db config\n * @type {Object}\n */\nexport default {\n  type: 'mysql',\n  adapter: {\n    mysql: {\n      host: 'rdsl0473555q8c7o1kqoo.mysql.rds.aliyuncs.com',\n      port: '3306',\n      database: 'first_dimension',\n      user: 'eva_db',\n      password: 'eva_2016',\n      prefix: '',\n      encoding: 'UTF8MB4_GENERAL_CI' \n    },\n    mongo: {\n\n    }\n  }\n};"
+    ]
+}

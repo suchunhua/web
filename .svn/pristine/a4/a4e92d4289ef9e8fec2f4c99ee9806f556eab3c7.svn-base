@@ -1,0 +1,29 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\base.js"
+    ],
+    "names": [
+        "init",
+        "http",
+        "__before",
+        "action",
+        "userToken",
+        "header",
+        "tokenService",
+        "think",
+        "service",
+        "tokenServiceInstance",
+        "verifyToken",
+        "verifyTokenResult",
+        "fail",
+        "__call",
+        "controller",
+        "rest"
+    ],
+    "mappings": "AAAA;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAGI;;;;;qBAKAA,I,iBAAKC,I,EAAM;AACP,wCAAMD,IAAN,YAAWC,IAAX;AACH,K;;AAED;;;;;;qBAIMC,Q;;;;;;;kCAEE,KAAKD,IAAL,CAAUE,MAAV,KAAqB,O;;;;;;;;AAGzB;AACIC,qC,GAAY,KAAKH,IAAL,CAAUI,MAAV,CAAiB,OAAjB,C;AAChB;;AACIC,wC,GAAeC,MAAMC,OAAN,CAAc,OAAd,C;AACfC,gD,GAAuB,IAAIH,YAAJ,E;AAC3B;;;mCAC8BG,qBAAqBC,WAArB,CAAiCN,SAAjC,C;;;AAA1BO,6C;;AACJ;AACA,gCAAIA,sBAAsB,MAA1B,EAAkC;AAC9B,qCAAKC,IAAL,CAAU,eAAV;AACH;AACD;AACA;AACA;AACA;AACA;AACA;AACA;;;;;;;;;;;;;;;;;qBAGJC,M,qBAAS;AACD,aAAKD,IAAL,CAAU,YAAV;AACH,K;AACD;AACJ;AACA;AACA;;;;EA9CyBL,MAAMO,UAAN,CAAiBC,I",
+    "file": "..\\..\\..\\src\\admin\\controller\\base.js",
+    "sourcesContent": [
+        "'use strict';\n// let user = {};\nexport default class extends think.controller.rest {\n\n    /**\n     * init\n     * @param  {Object} http []\n     * @return {}      []\n     */\n    init(http) {\n        super.init(http);\n    }\n\n    /**\n     * before magic method\n     * @return {Promise} []\n     */\n    async __before() {\n        //登录、注册不验证token\n        if (this.http.action === 'login') {\n            return;\n        }\n        //获取http-header token\n        let userToken = this.http.header(\"token\");\n        //调用tokenservice中间件\n        let tokenService = think.service(\"token\");\n        let tokenServiceInstance = new tokenService();\n        //验证token\n        let verifyTokenResult = await tokenServiceInstance.verifyToken(userToken);\n        //服务器错误时\n        if (verifyTokenResult === \"fail\") {\n            this.fail(\"TOKEN_INVALID\")\n        }\n        //获取用户信息\n        // user = verifyTokenResult.userInfo;\n        // //写入新token\n        // let newToken = await tokenServiceInstance.createToken({\n        //     userInfo: verifyTokenResult.userInfo\n        // });\n        // this.http.header(\"token\", newToken);\n    }\n\n    __call() {\n            this.fail(\"NEED_LOGIN\");\n        }\n        //用户信息\n    // userInfo() {\n    //     return user;\n    // }\n}\n"
+    ]
+}

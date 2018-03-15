@@ -1,0 +1,1067 @@
+'use strict';
+
+exports.__esModule = true;
+
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _base = require('./base.js');
+
+var _base2 = _interopRequireDefault(_base);
+
+var _usermgr = require('../connect/usermgr.js');
+
+var _usermgr2 = _interopRequireDefault(_usermgr);
+
+var _bizmgr = require('../connect/bizmgr.js');
+
+var _bizmgr2 = _interopRequireDefault(_bizmgr);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mgm = new _bizmgr2.default();
+//---------------------------
+var mgr = new _usermgr2.default();
+var errorCode = 0;
+
+var _class = function (_Base) {
+  (0, _inherits3.default)(_class, _Base);
+
+  function _class() {
+    (0, _classCallCheck3.default)(this, _class);
+    return (0, _possibleConstructorReturn3.default)(this, _Base.apply(this, arguments));
+  }
+
+  /**
+   * index action
+   * @return {Promise} []
+   */
+  _class.prototype.indexAction = function indexAction() {
+    //auto render template file index_index.html
+    return this.display();
+  };
+
+  _class.prototype.fd180Action = function () {
+    var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+      var gp, gp1, gp2;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return mgm.getCurrentPrice(1, 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+                //
+                console.log("-----------------");
+
+                return result.price;
+              });
+
+            case 3:
+              gp = _context.sent;
+
+              console.log(gp);
+              this.assign('price', gp);
+              _context.next = 16;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context['catch'](0);
+
+              console.log("f180服务器连不上");
+              this.assign('tips', "服务器正忙.....暂时不能购买");
+              this.assign('price', 12800);
+              this.assign('price1', 13800);
+              this.assign('price2', 16800);
+              return _context.abrupt('return', this.display());
+
+            case 16:
+              _context.next = 18;
+              return mgm.getCurrentPrice(2, 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+                //
+                console.log("-----------------");
+                return result.price;
+              });
+
+            case 18:
+              gp1 = _context.sent;
+
+              console.log(gp1);
+              this.assign('price1', gp1);
+              _context.next = 23;
+              return mgm.getCurrentPrice(8, 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+                //
+                console.log("-----------------");
+                return result.price;
+              });
+
+            case 23:
+              gp2 = _context.sent;
+
+              console.log(gp2);
+              this.assign('price2', gp2);
+              return _context.abrupt('return', this.display());
+
+            case 27:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, this, [[0, 8]]);
+    }));
+
+    function fd180Action() {
+      return _ref.apply(this, arguments);
+    }
+
+    return fd180Action;
+  }();
+
+  _class.prototype.fd600Action = function () {
+    var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
+      var gp, gp1, gp2;
+      return _regenerator2.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return mgm.getCurrentPrice(4, 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+
+                //
+                console.log("-----------------");
+                return result.price;
+                console.log(gp);
+              });
+
+            case 3:
+              gp = _context2.sent;
+
+              this.assign('price', gp);
+              _context2.next = 15;
+              break;
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2['catch'](0);
+
+              console.log("f180服务器连不上");
+              this.assign('tips', "服务器正忙.....暂时不能购买");
+              this.assign('price', 1122);
+              this.assign('price1', 1123);
+              this.assign('price2', 1124);
+              return _context2.abrupt('return', this.display());
+
+            case 15:
+              ;
+              _context2.prev = 16;
+              _context2.next = 19;
+              return mgm.getCurrentPrice(3, 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+                //
+                console.log("-----------------");
+                return result.price;
+              });
+
+            case 19:
+              gp1 = _context2.sent;
+
+              console.log(gp1);
+              this.assign('price1', gp1);
+              _context2.next = 27;
+              break;
+
+            case 24:
+              _context2.prev = 24;
+              _context2.t1 = _context2['catch'](16);
+
+              console.log("f180服务器连不上");
+
+            case 27:
+              ;
+              _context2.prev = 28;
+              _context2.next = 31;
+              return mgm.getCurrentPrice(9, 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+                //
+                console.log("-----------------");
+                return result.price;
+              });
+
+            case 31:
+              gp2 = _context2.sent;
+
+              console.log(gp2);
+              this.assign('price2', gp2);
+
+              _context2.next = 39;
+              break;
+
+            case 36:
+              _context2.prev = 36;
+              _context2.t2 = _context2['catch'](28);
+
+              console.log("f180服务器连不上");
+
+            case 39:
+              return _context2.abrupt('return', this.display());
+
+            case 40:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this, [[0, 7], [16, 24], [28, 36]]);
+    }));
+
+    function fd600Action() {
+      return _ref2.apply(this, arguments);
+    }
+
+    return fd600Action;
+  }();
+
+  _class.prototype.exomeAction = function () {
+    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3() {
+      var infor, gp;
+      return _regenerator2.default.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              infor = this.get();
+              _context3.next = 4;
+              return mgm.getCurrentPrice(5, 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+                //
+                console.log("-----------------");
+                return result.price;
+              });
+
+            case 4:
+              gp = _context3.sent;
+
+              console.log(gp);
+              this.assign('price', gp);
+
+              _context3.next = 15;
+              break;
+
+            case 9:
+              _context3.prev = 9;
+              _context3.t0 = _context3['catch'](0);
+
+              console.log(_context3.t0);
+              console.log("服务器连不上");
+
+              //test(this);
+              this.assign('price', '111');
+              this.assign('tips', "服务器正忙.....暂时不能购买");
+
+            case 15:
+              return _context3.abrupt('return', this.display());
+
+            case 16:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this, [[0, 9]]);
+    }));
+
+    function exomeAction() {
+      return _ref3.apply(this, arguments);
+    }
+
+    return exomeAction;
+  }();
+
+  _class.prototype.buyAction = function () {
+    var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4() {
+      var infor, userId, testItem, arrayItem, aa, gp00, gp, gp11, gp1, gp22, gp2, bb, bb1, cc, cc1, aa2, aa3, countPrice, bb2, cc2, _testItem, price;
+
+      return _regenerator2.default.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+
+              //这个是优惠码的代码
+              infor = this.get();
+              userId = this.cookie("userId");
+
+
+              this.assign("orderId", infor.orderId);
+
+              if (!(this.isGet() && infor.code != 'undefined' && infor.code != null)) {
+                _context4.next = 85;
+                break;
+              }
+
+              // let buyinfor = this.get();
+
+              console.log("buyinforAction code test");
+              console.log(infor.code);
+              this.assign("infor", infor);
+              //this.assign("infor.pname",infor.pname);
+
+              this.assign("reptReceiver", infor.username);
+
+              this.assign("recvAddress", infor.adress);
+
+              this.assign("email", infor.email);
+
+              this.assign("code", infor.code);
+
+              this.assign("price", infor.totalprice);
+
+              this.assign("testItem", infor.testItem);
+
+              this.assign("notes", infor.notes);
+
+              // this.assign("orderId",infor.orderId);
+
+              console.log(infor);
+              //console.log(buyinfor.testItem);
+              testItem = infor.testItem;
+              arrayItem = testItem.split(",");
+
+              console.log(arrayItem);
+              console.log(arrayItem[3]);
+
+              _context4.next = 21;
+              return mgm.getPersonCurrentPrice(userId, arrayItem[0], infor.code).then(function (result) {
+                //console.log(result);
+                return result;
+              });
+
+            case 21:
+              aa = _context4.sent;
+
+              console.log('--------aa--------');
+              console.log(aa.price);
+
+              //把错误失效的优惠码获取价格较低的那个这个是和10个A做比较的测试
+
+              _context4.prev = 24;
+              _context4.next = 27;
+              return mgm.getCurrentPrice(arrayItem[0], 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+                //
+                console.log("-----------------");
+
+                return result.price;
+              });
+
+            case 27:
+              gp00 = _context4.sent;
+
+              //console.log("============="+gp);
+              gp = gp00;
+              _context4.next = 34;
+              break;
+
+            case 31:
+              _context4.prev = 31;
+              _context4.t0 = _context4['catch'](24);
+
+              console.log("获取10个大A的价格测试失败");
+
+            case 34:
+              _context4.prev = 34;
+              _context4.next = 37;
+              return mgm.getCurrentPrice(arrayItem[2], 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+                //
+                console.log("-----------------");
+
+                return result.price;
+              });
+
+            case 37:
+              gp11 = _context4.sent;
+
+              console.log(gp11);
+              gp1 = gp11;
+              _context4.next = 45;
+              break;
+
+            case 42:
+              _context4.prev = 42;
+              _context4.t1 = _context4['catch'](34);
+
+              console.log("获取10个大A的价格测试失败");
+
+            case 45:
+              _context4.prev = 45;
+              _context4.next = 48;
+              return mgm.getCurrentPrice(arrayItem[4], 'AAAAAAAAAA').then(function (result) {
+                console.log(result.itemId + result.price + "----------------");
+                //
+                console.log("-----------------");
+
+                return result.price;
+              });
+
+            case 48:
+              gp22 = _context4.sent;
+
+              console.log(gp22);
+              gp2 = gp22;
+              _context4.next = 56;
+              break;
+
+            case 53:
+              _context4.prev = 53;
+              _context4.t2 = _context4['catch'](45);
+
+              console.log("获取10个大A的价格测试失败");
+
+            case 56:
+              _context4.prev = 56;
+              _context4.next = 59;
+              return mgm.getPersonCurrentPrice(userId, arrayItem[2], infor.code).then(function (result) {
+                //console.log(result);
+                return result;
+              });
+
+            case 59:
+              bb = _context4.sent;
+
+
+              console.log(bb);
+
+              bb1 = bb.price;
+              _context4.next = 66;
+              break;
+
+            case 64:
+              _context4.prev = 64;
+              _context4.t3 = _context4['catch'](56);
+
+            case 66:
+              _context4.prev = 66;
+              _context4.next = 69;
+              return mgm.getPersonCurrentPrice(userId, arrayItem[4], infor.code).then(function (result) {
+                //console.log(result);
+                return result;
+              });
+
+            case 69:
+              cc = _context4.sent;
+
+
+              console.log(cc);
+              cc1 = cc.price;
+              _context4.next = 76;
+              break;
+
+            case 74:
+              _context4.prev = 74;
+              _context4.t4 = _context4['catch'](66);
+
+            case 76:
+              aa2 = aa.price;
+              aa3 = gp > aa2 ? aa2 : gp;
+              countPrice = aa3 * arrayItem[1];
+
+              //var countPrice = gp>countPrice1?countPrice1:gp;
+
+              console.log(countPrice);
+              if (arrayItem[2] != null) {
+                bb2 = gp1 > bb1 ? bb1 : gp1;
+
+                countPrice = countPrice + bb2 * arrayItem[3];
+                console.log(countPrice);
+              }
+
+              if (arrayItem[4] != null) {
+                cc2 = gp2 > cc1 ? cc1 : gp2;
+
+                countPrice = countPrice + cc2 * arrayItem[5];
+                console.log(countPrice);
+              }
+
+              this.assign("countPrice", countPrice);
+              console.log('====countPrice test==========');
+
+              return _context4.abrupt('return', this.display());
+
+            case 85:
+              _context4.prev = 85;
+
+              // let infor =this.get();
+              console.log("--------buyAction start --------------");
+              //console.log(price+"|"+itemId+"|"+number);
+              console.log(infor);
+              //production infor 
+              this.assign("infor", infor);
+              //production name 
+              this.assign("pname", infor.pname);
+              //add production testItem
+
+              _testItem = "";
+
+              if (infor.ft_n >= 1) {
+                _testItem = infor.ft + "," + infor.ft_n + ",";
+              }
+
+              if (infor.fc_n >= 1) {
+                _testItem += infor.fc + "," + infor.fc_n + ",";
+              }
+
+              if (infor.fa_n >= 1) {
+                _testItem += infor.fa + "," + infor.fa_n + ",";
+              }
+              _testItem = _testItem.substring(0, _testItem.length - 1);
+              console.log("------testItem test---------");
+              console.log(_testItem);
+              this.assign("testItem", _testItem);
+
+              //add production totalprice
+              price = infor.price * infor.ft_n;
+
+              if (infor.price1 != null) {
+                price += infor.price1 * infor.fc_n;
+              }
+              if (infor.price2 != null) {
+                price += infor.price2 * infor.fa_n;
+              }
+              console.log(price);
+              this.assign("price", price);
+              if (infor.payprice != 'undefined') {
+                this.assign("price", infor.payprice);
+              }
+              if (infor.recvAddress != 'undefined') {
+                this.assign("recvAddress", infor.recvAddress);
+              }
+              if (infor.notes != 'undefined') {
+                this.assign("notes", infor.notes);
+              }
+
+              console.log(infor.notes);
+              if (infor.reptReceiver != 'undefined') {
+                this.assign("reptReceiver", infor.reptReceiver);
+              }
+              console.log("----------------");
+              //this.assign("price",infor.price);
+
+              //return this.redirect('/production/buy');
+              //console.log(this);
+
+
+              return _context4.abrupt('return', this.display());
+
+            case 112:
+              _context4.prev = 112;
+              _context4.t5 = _context4['catch'](85);
+
+              this.assign("msg", "服务器正忙，请稍后再试");
+              return _context4.abrupt('return', this.display());
+
+            case 116:
+            case 'end':
+              return _context4.stop();
+          }
+        }
+      }, _callee4, this, [[24, 31], [34, 42], [45, 53], [56, 64], [66, 74], [85, 112]]);
+    }));
+
+    function buyAction() {
+      return _ref4.apply(this, arguments);
+    }
+
+    return buyAction;
+  }();
+
+  _class.prototype.buyinforAction = function () {
+    var _ref5 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee5() {
+      var tradeinfor, userId, orderId3, orderId4, pm1, uo, pm2, pm, _pm, userId1, orderId1, orderInfor, pm3, _pm2;
+
+      return _regenerator2.default.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              tradeinfor = this.post();
+              userId = this.cookie("userId");
+
+              //这个是从未支付的里订单的updateOrder的操作
+
+              console.log("===========buyinforAction start ==========================");
+
+              console.log(tradeinfor);
+              orderId3 = tradeinfor.orderId;
+              orderId4 = parseInt(orderId3);
+
+              console.log(orderId4);
+
+              console.log(typeof orderId4 === 'undefined' ? 'undefined' : (0, _typeof3.default)(orderId4));
+
+              if (!(this.isPost() && tradeinfor.orderId > 0)) {
+                _context5.next = 26;
+                break;
+              }
+
+              console.log("========updTestOrder==============");
+
+              _context5.next = 12;
+              return mgm.queryOrder(userId).then(function (result) {
+
+                //console.log(result);
+                return result;
+              }, function (error) {
+                console.log(error);
+              });
+
+            case 12:
+              pm1 = _context5.sent;
+
+              console.log(pm1.testList[0].customerId);
+
+              _context5.next = 16;
+              return mgm.updTestOrder(userId, tradeinfor.orderId, pm1.testList[0].customerId, tradeinfor.testItem, tradeinfor.phoneNum, tradeinfor.email, tradeinfor.username, tradeinfor.totalprice, tradeinfor.adress, tradeinfor.notes, tradeinfor.promCode).then(function (result) {
+
+                console.log(result);
+
+                return result;
+              });
+
+            case 16:
+              uo = _context5.sent;
+
+
+              console.log(uo);
+
+              /*if(uo.errorCode==0){
+                 console.log("=====addOrUpdOrderAccess start=================");
+                 var userId1 = tradeinfor.orderId+','+userId;
+                 var orderId1 = tradeinfor.orderId;
+                 var orderInfor={orderId:orderId1,userId:userId1};
+                 console.log(orderInfor);
+                 BizMgr.setOrder(orderInfor);
+                 try{
+                  let pm3 = await mgm.addOrUpdOrderAccess(userId, tradeinfor.orderId)
+                  .then(function(result){
+                      
+                      return result;
+                  },function(error){
+                    return error;
+                  })
+                     console.log(pm3)
+                 }catch(e){
+                     }
+                
+               }
+              */
+
+              console.log("===== notpay  buildAliPayRequest start=================");
+              // let pm2 = await mgm.buildAliPayRequest(userId, pm1.orderId, tradeinfor.pname,tradeinfor.totalprice, 1,'http://eaxqe3.natappfree.cc/backextra/alipaynotify','http://eaxqe3.natappfree.cc/backextra/alipayreturn')
+              _context5.next = 21;
+              return mgm.buildAliPayRequest(userId, tradeinfor.orderId, tradeinfor.pname, tradeinfor.totalprice, 1, 'http://121.40.55.125:8360/backextra/alipaynotify', 'http://121.40.55.125:8360/backextra/alipayreturn').then(function (result) {
+                console.log(result);
+                return result;
+              });
+
+            case 21:
+              pm2 = _context5.sent;
+
+
+              console.log("=======buyinforAction pm============");
+              //console.log(pm);
+              console.log((0, _typeof3.default)(pm2.formText));
+              this.assign("formtext", pm2.formText);
+              //this.assign("totalprice",tradeinfor.totalprice);
+
+
+              return _context5.abrupt('return', this.display());
+
+            case 26:
+
+              console.log("--------alipay start --------------");
+              // let tradeinfor = this.post();
+              console.log(tradeinfor);
+              console.log(tradeinfor.totalprice);
+              console.log(tradeinfor.pname);
+              console.log("=======addCustomer start============");
+              userId = this.cookie("userId");
+
+              console.log("[buyinforAction] " + userId);
+              _context5.next = 35;
+              return mgm.addCustomer(userId, tradeinfor.username, tradeinfor.phoneNum, tradeinfor.email).then(function (result) {
+
+                console.log(result);
+
+                return result;
+              });
+
+            case 35:
+              pm = _context5.sent;
+
+              console.log("======= addCustomer pm==========");
+              console.log(pm);
+
+              if (!(pm.errorCode == 0)) {
+                _context5.next = 73;
+                break;
+              }
+
+              console.log("=====addTestOrder start=================");
+              _context5.next = 42;
+              return mgm.addTestOrder(userId, pm.customerId, tradeinfor.testItem, tradeinfor.phoneNum, tradeinfor.email, tradeinfor.username, tradeinfor.totalprice, tradeinfor.adress, tradeinfor.notes, tradeinfor.code).then(function (result) {
+                console.log(result);
+
+                return result;
+              });
+
+            case 42:
+              _pm = _context5.sent;
+
+              console.log("======= addTestOrder pm1==========");
+              console.log(_pm);
+
+              if (!(_pm.errorCode == 0)) {
+                _context5.next = 70;
+                break;
+              }
+
+              console.log("=====addOrUpdOrderAccess start=================");
+              userId1 = _pm.orderId + ',' + userId;
+              orderId1 = _pm.orderId;
+              orderInfor = { orderId: orderId1, userId: userId1 };
+
+              console.log(orderInfor);
+              _bizmgr2.default.setOrder(orderInfor);
+              _context5.prev = 52;
+              _context5.next = 55;
+              return mgm.addOrUpdOrderAccess(userId, _pm.orderId).then(function (result) {
+
+                return result;
+              }, function (error) {
+                return error;
+              });
+
+            case 55:
+              pm3 = _context5.sent;
+              _context5.next = 60;
+              break;
+
+            case 58:
+              _context5.prev = 58;
+              _context5.t0 = _context5['catch'](52);
+
+            case 60:
+
+              console.log("=====buildAliPayRequest start=================");
+              // let pm2 = await mgm.buildAliPayRequest(userId, pm1.orderId, tradeinfor.pname,tradeinfor.totalprice, 1,'http://cfxi2z.natappfree.cc/backextra/alipaynotify','http://cfxi2z.natappfree.cc/backextra/alipayreturn')
+              _context5.next = 63;
+              return mgm.buildAliPayRequest(userId, _pm.orderId, tradeinfor.pname, tradeinfor.totalprice, 1, 'http://121.40.55.125:8360/backextra/alipaynotify', 'http://121.40.55.125:8360/backextra/alipayreturn').then(function (result) {
+                console.log(result);
+                return result;
+              });
+
+            case 63:
+              _pm2 = _context5.sent;
+
+
+              console.log("=======buyinforAction pm============");
+              //console.log(pm);
+              console.log((0, _typeof3.default)(_pm2.formText));
+              this.assign("formtext", _pm2.formText);
+              this.assign("totalprice", tradeinfor.totalprice);
+
+              _context5.next = 71;
+              break;
+
+            case 70:
+
+              console.log(" alipay fail ");
+
+            case 71:
+              _context5.next = 74;
+              break;
+
+            case 73:
+              console.log(" alipay fail ");
+
+            case 74:
+              return _context5.abrupt('return', this.display());
+
+            case 75:
+            case 'end':
+              return _context5.stop();
+          }
+        }
+      }, _callee5, this, [[52, 58]]);
+    }));
+
+    function buyinforAction() {
+      return _ref5.apply(this, arguments);
+    }
+
+    return buyinforAction;
+  }();
+
+  //unipay method 
+
+
+  _class.prototype.unipaybuyinforAction = function () {
+    var _ref6 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee6() {
+      var tradeinfor, userId, orderId3, orderId4, pm1, uo, pm, _pm3, _pm4, pm3, _pm5;
+
+      return _regenerator2.default.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              tradeinfor = this.post();
+              userId = this.cookie("userId");
+              //这个是从未支付的里订单的updateOrder的操作
+
+              console.log("===========buyinforAction start ==========================");
+
+              console.log(tradeinfor);
+              orderId3 = tradeinfor.orderId;
+              orderId4 = parseInt(orderId3);
+
+              console.log(orderId4);
+
+              console.log(typeof orderId4 === 'undefined' ? 'undefined' : (0, _typeof3.default)(orderId4));
+
+              if (!(this.isPost() && tradeinfor.orderId > 0)) {
+                _context6.next = 26;
+                break;
+              }
+
+              console.log("========updTestOrder==============");
+
+              _context6.next = 12;
+              return mgm.queryOrder(userId).then(function (result) {
+
+                //console.log(result);
+                return result;
+              }, function (error) {
+                console.log(error);
+              });
+
+            case 12:
+              pm1 = _context6.sent;
+
+              console.log(pm1.testList[0].customerId);
+
+              _context6.next = 16;
+              return mgm.updTestOrder(userId, tradeinfor.orderId, pm1.testList[0].customerId, tradeinfor.testItem, tradeinfor.phoneNum, tradeinfor.email, tradeinfor.username, tradeinfor.totalprice, tradeinfor.adress, tradeinfor.notes, tradeinfor.promCode).then(function (result) {
+
+                console.log(result);
+
+                return result;
+              });
+
+            case 16:
+              uo = _context6.sent;
+
+
+              console.log(uo);
+
+              /*if(uo.errorCode==0){
+                 console.log("=====addOrUpdOrderAccess start=================");
+                 var userId1 = tradeinfor.orderId+','+userId;
+                 var orderId1 = tradeinfor.orderId;
+                 var orderInfor={orderId:orderId1,userId:userId1};
+                 console.log(orderInfor);
+                 BizMgr.setOrder(orderInfor);
+                 try{
+                  let pm3 = await mgm.addOrUpdOrderAccess(userId, tradeinfor.orderId)
+                  .then(function(result){
+                      
+                      return result;
+                  },function(error){
+                    return error;
+                  })
+                     console.log(pm3)
+                 }catch(e){
+                     }
+                
+               }
+              */
+
+              console.log("======= notpay unipaybuyinforAction start============");
+              //let pm = await mgm.unionPay(userId,pm1.orderId,tradeinfor.totalprice*100,"http://eaxqe3.natappfree.cc/back/test","http://eaxqe3.natappfree.cc/back/backtest")
+              _context6.next = 21;
+              return mgm.unionPay(userId, tradeinfor.orderId, tradeinfor.totalprice * 100, "http://121.40.55.125:8360/back/test", "http://121.40.55.125:8360/back/backtest").then(function (result) {
+
+                console.log(result);
+
+                return result;
+              });
+
+            case 21:
+              pm = _context6.sent;
+
+              console.log("=======unipaybuyinforAction pm============");
+              //console.log(pm);
+              console.log((0, _typeof3.default)(pm.formText));
+              this.assign("formtext", pm.formText);
+              //this.assign("totalprice",tradeinfor.totalprice);
+              return _context6.abrupt('return', this.display());
+
+            case 26:
+              _context6.prev = 26;
+
+              console.log("--------unipay start --------------");
+
+              console.log(tradeinfor);
+              console.log(tradeinfor.totalprice);
+              console.log(tradeinfor.pname);
+              userId = this.cookie("userId");
+
+              console.log("[buyinforAction] " + userId);
+
+              console.log("=======addCustomer start============");
+              userId = this.cookie("userId");
+
+              console.log("[buyinforAction] " + userId);
+              _context6.next = 38;
+              return mgm.addCustomer(userId, tradeinfor.username, tradeinfor.phoneNum, tradeinfor.email).then(function (result) {
+
+                console.log(result);
+
+                return result;
+              });
+
+            case 38:
+              _pm3 = _context6.sent;
+
+              console.log("======= addCustomer pm==========");
+              console.log(_pm3);
+
+              if (!(_pm3.errorCode == 0)) {
+                _context6.next = 72;
+                break;
+              }
+
+              console.log("=====addTestOrder start=================");
+              _context6.next = 45;
+              return mgm.addTestOrder(userId, _pm3.customerId, tradeinfor.testItem, tradeinfor.phoneNum, tradeinfor.email, tradeinfor.username, tradeinfor.totalprice, tradeinfor.adress, tradeinfor.notes, tradeinfor.code).then(function (result) {
+                console.log(result);
+
+                return result;
+              });
+
+            case 45:
+              _pm4 = _context6.sent;
+
+              console.log("======= addTestOrder pm1==========");
+              console.log(_pm4);
+
+              if (!(_pm4.errorCode == 0)) {
+                _context6.next = 69;
+                break;
+              }
+
+              console.log("=====addOrUpdOrderAccess start=================");
+              _context6.prev = 50;
+              _context6.next = 53;
+              return mgm.addOrUpdOrderAccess(userId, _pm4.orderId).then(function (result) {
+
+                return result;
+              }, function (error) {
+                return error;
+              });
+
+            case 53:
+              pm3 = _context6.sent;
+              _context6.next = 58;
+              break;
+
+            case 56:
+              _context6.prev = 56;
+              _context6.t0 = _context6['catch'](50);
+
+            case 58:
+
+              console.log("=======unipaybuyinforAction start============");
+              //let pm = await mgm.unionPay(userId,pm1.orderId,tradeinfor.totalprice*100,"http://eaxqe3.natappfree.cc/back/test","http://eaxqe3.natappfree.cc/back/backtest")
+              _context6.next = 61;
+              return mgm.unionPay(userId, _pm4.orderId, tradeinfor.totalprice * 100, "http://121.40.55.125:8360/back/test", "http://121.40.55.125:8360/back/backtest").then(function (result) {
+
+                console.log(result);
+
+                return result;
+              });
+
+            case 61:
+              _pm5 = _context6.sent;
+
+              console.log("=======unipaybuyinforAction pm============");
+              //console.log(pm);
+              console.log((0, _typeof3.default)(_pm5.formText));
+              this.assign("formtext", _pm5.formText);
+              this.assign("totalprice", tradeinfor.totalprice);
+              return _context6.abrupt('return', this.display());
+
+            case 69:
+
+              console.log(" unionpay fail ");
+
+            case 70:
+              _context6.next = 73;
+              break;
+
+            case 72:
+              console.log(" unionpay fail ");
+
+            case 73:
+              _context6.next = 79;
+              break;
+
+            case 75:
+              _context6.prev = 75;
+              _context6.t1 = _context6['catch'](26);
+
+              this.assign("msg", "服务器正忙，请稍后再试");
+              return _context6.abrupt('return', this.display());
+
+            case 79:
+            case 'end':
+              return _context6.stop();
+          }
+        }
+      }, _callee6, this, [[26, 75], [50, 56]]);
+    }));
+
+    function unipaybuyinforAction() {
+      return _ref6.apply(this, arguments);
+    }
+
+    return unipaybuyinforAction;
+  }();
+
+  return _class;
+}(_base2.default);
+
+exports.default = _class;
+//# sourceMappingURL=production.js.map

@@ -1,0 +1,194 @@
+'use strict';
+
+exports.__esModule = true;
+
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _base = require('./base.js');
+
+var _base2 = _interopRequireDefault(_base);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _class = function (_Base) {
+	(0, _inherits3.default)(_class, _Base);
+
+	function _class() {
+		(0, _classCallCheck3.default)(this, _class);
+		return (0, _possibleConstructorReturn3.default)(this, _Base.apply(this, arguments));
+	}
+
+	_class.prototype.getAction = function () {
+		var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+			return _regenerator2.default.wrap(function _callee$(_context) {
+				while (1) {
+					switch (_context.prev = _context.next) {
+						case 0:
+							if (!think.isEmpty(this.get("id"))) {
+								this.detail();
+							} else {
+								this.list();
+							}
+
+						case 1:
+						case 'end':
+							return _context.stop();
+					}
+				}
+			}, _callee, this);
+		}));
+
+		function getAction() {
+			return _ref.apply(this, arguments);
+		}
+
+		return getAction;
+	}();
+
+	_class.prototype.detail = function () {
+		var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
+			var scientist;
+			return _regenerator2.default.wrap(function _callee2$(_context2) {
+				while (1) {
+					switch (_context2.prev = _context2.next) {
+						case 0:
+							_context2.next = 2;
+							return this.model('science_advisor').where({ id: this.get("id") }).find();
+
+						case 2:
+							scientist = _context2.sent;
+							return _context2.abrupt('return', this.success(scientist));
+
+						case 4:
+						case 'end':
+							return _context2.stop();
+					}
+				}
+			}, _callee2, this);
+		}));
+
+		function detail() {
+			return _ref2.apply(this, arguments);
+		}
+
+		return detail;
+	}();
+
+	_class.prototype.list = function () {
+		var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3() {
+			var page, size, where, list;
+			return _regenerator2.default.wrap(function _callee3$(_context3) {
+				while (1) {
+					switch (_context3.prev = _context3.next) {
+						case 0:
+							page = this.get('page') || 1;
+							size = this.get('size') || 10;
+							where = {
+								isdelete: 0
+							};
+
+							if (this.get('key')) {
+								where.name = ['like', '%' + this.get('key') + '%'];
+							}
+							_context3.next = 6;
+							return this.model('science_advisor').where(where).order("updatetime DESC").page(page, size).countSelect(false);
+
+						case 6:
+							list = _context3.sent;
+							return _context3.abrupt('return', this.success(list));
+
+						case 8:
+						case 'end':
+							return _context3.stop();
+					}
+				}
+			}, _callee3, this);
+		}));
+
+		function list() {
+			return _ref3.apply(this, arguments);
+		}
+
+		return list;
+	}();
+
+	_class.prototype.postAction = function () {
+		var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4() {
+			var id, name, education, image;
+			return _regenerator2.default.wrap(function _callee4$(_context4) {
+				while (1) {
+					switch (_context4.prev = _context4.next) {
+						case 0:
+							id = this.post('id');
+							name = this.post('name');
+							education = this.post('education');
+							image = this.post('image');
+
+							if (!(think.isEmpty(name) || think.isEmpty(education) || think.isEmpty(image))) {
+								_context4.next = 6;
+								break;
+							}
+
+							return _context4.abrupt('return', this.fail('ADMIN_PARAM_LACKED'));
+
+						case 6:
+							if (!think.isEmpty(id)) {
+								_context4.next = 14;
+								break;
+							}
+
+							_context4.t0 = this;
+							_context4.next = 10;
+							return this.model('science_advisor').add(this.post());
+
+						case 10:
+							_context4.t1 = _context4.sent;
+							return _context4.abrupt('return', _context4.t0.success.call(_context4.t0, _context4.t1));
+
+						case 14:
+							_context4.t2 = this;
+							_context4.next = 17;
+							return this.model('science_advisor').update(this.post());
+
+						case 17:
+							_context4.t3 = _context4.sent;
+							return _context4.abrupt('return', _context4.t2.success.call(_context4.t2, _context4.t3));
+
+						case 19:
+						case 'end':
+							return _context4.stop();
+					}
+				}
+			}, _callee4, this);
+		}));
+
+		function postAction() {
+			return _ref4.apply(this, arguments);
+		}
+
+		return postAction;
+	}();
+
+	return _class;
+}(_base2.default);
+
+exports.default = _class;
+//# sourceMappingURL=science.js.map

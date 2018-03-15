@@ -1,0 +1,583 @@
+'use strict';
+//都放在一个back.js里面不方便多一个试一下。
+"user strict";
+
+exports.__esModule = true;
+
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _base = require('./base.js');
+
+var _base2 = _interopRequireDefault(_base);
+
+var _usermgr = require('../connect/usermgr.js');
+
+var _usermgr2 = _interopRequireDefault(_usermgr);
+
+var _bizmgr = require('../connect/bizmgr.js');
+
+var _bizmgr2 = _interopRequireDefault(_bizmgr);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mgr = new _usermgr2.default();
+//-------------------------------
+var mgm = new _bizmgr2.default();
+var errorCode = 0;
+
+var _class = function (_Base) {
+	(0, _inherits3.default)(_class, _Base);
+
+	function _class() {
+		(0, _classCallCheck3.default)(this, _class);
+		return (0, _possibleConstructorReturn3.default)(this, _Base.apply(this, arguments));
+	}
+
+	_class.prototype.indexAction = function () {
+		var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+			var data;
+			return _regenerator2.default.wrap(function _callee$(_context) {
+				while (1) {
+					switch (_context.prev = _context.next) {
+						case 0:
+							data = { name: "thinkjs" };
+
+							this.success(data);
+
+						case 2:
+						case 'end':
+							return _context.stop();
+					}
+				}
+			}, _callee, this);
+		}));
+
+		function indexAction() {
+			return _ref.apply(this, arguments);
+		}
+
+		return indexAction;
+	}();
+
+	_class.prototype.adddiscpriceAction = function () {
+		var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
+			var userId, pm, addinfor, senderId, dp, i, _pm;
+
+			return _regenerator2.default.wrap(function _callee2$(_context2) {
+				while (1) {
+					switch (_context2.prev = _context2.next) {
+						case 0:
+							console.log("=======adddiscpriceAction start ===================");
+
+							if (!this.isGet()) {
+								_context2.next = 15;
+								break;
+							}
+
+							_context2.prev = 2;
+							userId = this.cookie('userId');
+							_context2.next = 6;
+							return mgm.getTestItemList(userId).then(function (result) {
+
+								return result;
+							}, function (error) {
+								console.log(error);
+							});
+
+						case 6:
+							pm = _context2.sent;
+
+
+							console.log("======pricelistAction pm=========");
+							console.log(pm);
+
+							this.assign('itemList', pm.itemList);
+							_context2.next = 14;
+							break;
+
+						case 12:
+							_context2.prev = 12;
+							_context2.t0 = _context2['catch'](2);
+
+						case 14:
+							return _context2.abrupt('return', this.display());
+
+						case 15:
+							_context2.prev = 15;
+							addinfor = this.post();
+
+							console.log(addinfor);
+							senderId = this.cookie('userId');
+
+							//judge promotioncode exit is or not 
+
+							_context2.next = 21;
+							return mgm.getDiscPriceList(senderId).then(function (result) {
+								//process.stdout.write(result);
+								//console.log(result.toString()); 
+								//var ret = JSON.parse(result.toString());
+								// pm.pname = BizMgr.getPrductName(pm.productid)
+								return result;
+							}, function (error) {
+								console.log(error);
+							});
+
+						case 21:
+							dp = _context2.sent;
+
+							console.log("=========dp==============");
+							console.log(dp);
+							console.log(addinfor.promotionCode + addinfor.itemid);
+							console.log(dp.discList);
+							_context2.t1 = _regenerator2.default.keys(dp.discList);
+
+						case 27:
+							if ((_context2.t2 = _context2.t1()).done) {
+								_context2.next = 42;
+								break;
+							}
+
+							i = _context2.t2.value;
+
+							console.log(dp.discList[i].promotionCode + "||" + dp.discList[i].itemId);
+
+							if (!(dp.discList[i].promotionCode == addinfor.promotionCode && dp.discList[i].itemId == addinfor.itemid)) {
+								_context2.next = 36;
+								break;
+							}
+
+							console.log("pay success");
+							console.log(dp.discList[i].itemId);
+							//this.error("addtip","优惠码已存在");
+							//this.assign("addtip","优惠码已存在");
+							//return this.redirect("/backextra/adddiscprice");
+							return _context2.abrupt('return', this.error("addtip", "优惠码已存在"));
+
+						case 36:
+							_context2.next = 38;
+							return mgm.addDiscPrice(senderId, addinfor.promotionCode, addinfor.itemid, addinfor.startDate, addinfor.endDate, addinfor.price).then(function (result) {
+
+								return result;
+							}, function (error) {
+								return error;
+							});
+
+						case 38:
+							_pm = _context2.sent;
+							return _context2.abrupt('return', this.redirect("/back/disclist"));
+
+						case 40:
+							_context2.next = 27;
+							break;
+
+						case 42:
+							_context2.next = 46;
+							break;
+
+						case 44:
+							_context2.prev = 44;
+							_context2.t3 = _context2['catch'](15);
+
+						case 46:
+							return _context2.abrupt('return', this.display());
+
+						case 47:
+						case 'end':
+							return _context2.stop();
+					}
+				}
+			}, _callee2, this, [[2, 12], [15, 44]]);
+		}));
+
+		function adddiscpriceAction() {
+			return _ref2.apply(this, arguments);
+		}
+
+		return adddiscpriceAction;
+	}();
+
+	_class.prototype.updatediscinforAction = function () {
+		var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3() {
+			var discinfor, senderId, pm;
+			return _regenerator2.default.wrap(function _callee3$(_context3) {
+				while (1) {
+					switch (_context3.prev = _context3.next) {
+						case 0:
+							discinfor = this.post();
+
+							console.log("======discinforAction start=============");
+							console.log(discinfor);
+							senderId = this.cookie('userId');
+							_context3.prev = 4;
+							_context3.next = 7;
+							return mgm.updDiscPrice(senderId, discinfor.id, discinfor.promotionCode, discinfor.itemId, discinfor.startDate, discinfor.endDate, discinfor.price).then(function (result) {
+
+								return result;
+							});
+
+						case 7:
+							pm = _context3.sent;
+							_context3.next = 13;
+							break;
+
+						case 10:
+							_context3.prev = 10;
+							_context3.t0 = _context3['catch'](4);
+							return _context3.abrupt('return', this.redirect("/index/index"));
+
+						case 13:
+							return _context3.abrupt('return', this.redirect("/back/disclist"));
+
+						case 14:
+						case 'end':
+							return _context3.stop();
+					}
+				}
+			}, _callee3, this, [[4, 10]]);
+		}));
+
+		function updatediscinforAction() {
+			return _ref3.apply(this, arguments);
+		}
+
+		return updatediscinforAction;
+	}();
+
+	_class.prototype.adduserAction = function () {
+		var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4() {
+			var infor, senderId, pm;
+			return _regenerator2.default.wrap(function _callee4$(_context4) {
+				while (1) {
+					switch (_context4.prev = _context4.next) {
+						case 0:
+							infor = this.post();
+
+
+							console.log("======adduserAction start============");
+
+							console.log(infor);
+
+							_context4.prev = 3;
+							senderId = this.cookie('userId');
+							// var userId = this.get('userId');
+
+							_context4.next = 7;
+							return mgr.addUser(senderId, infor.name, infor.password, infor.phone, infor.email, infor.realName, infor.userRole).then(function (result) {
+
+								return result;
+							}, function (error) {
+								return error;
+							});
+
+						case 7:
+							pm = _context4.sent;
+							_context4.next = 13;
+							break;
+
+						case 10:
+							_context4.prev = 10;
+							_context4.t0 = _context4['catch'](3);
+							return _context4.abrupt('return', this.display("index/index"));
+
+						case 13:
+							return _context4.abrupt('return', this.redirect("/back/userlist"));
+
+						case 14:
+						case 'end':
+							return _context4.stop();
+					}
+				}
+			}, _callee4, this, [[3, 10]]);
+		}));
+
+		function adduserAction() {
+			return _ref4.apply(this, arguments);
+		}
+
+		return adduserAction;
+	}();
+
+	_class.prototype.deletediscAction = function () {
+		var _ref5 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee5() {
+			var infor, senderId, pm;
+			return _regenerator2.default.wrap(function _callee5$(_context5) {
+				while (1) {
+					switch (_context5.prev = _context5.next) {
+						case 0:
+							infor = this.get();
+
+							console.log("=======deletediscAction start ==============");
+
+							console.log(infor);
+
+							_context5.prev = 3;
+							senderId = this.cookie('userId');
+							_context5.next = 7;
+							return mgm.deleleDiscPrice(senderId, infor.id).then(function (result) {
+								return result;
+							});
+
+						case 7:
+							pm = _context5.sent;
+							_context5.next = 13;
+							break;
+
+						case 10:
+							_context5.prev = 10;
+							_context5.t0 = _context5['catch'](3);
+							return _context5.abrupt('return', this.redirect("/index/index"));
+
+						case 13:
+							return _context5.abrupt('return', this.redirect("/back/disclist"));
+
+						case 14:
+						case 'end':
+							return _context5.stop();
+					}
+				}
+			}, _callee5, this, [[3, 10]]);
+		}));
+
+		function deletediscAction() {
+			return _ref5.apply(this, arguments);
+		}
+
+		return deletediscAction;
+	}();
+
+	_class.prototype.alipayreturnAction = function () {
+		var _ref6 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee6() {
+			var aliinfor, senderId, aliinfor1, pm;
+			return _regenerator2.default.wrap(function _callee6$(_context6) {
+				while (1) {
+					switch (_context6.prev = _context6.next) {
+						case 0:
+
+							console.log("alipayreturnAction start");
+							aliinfor = this.get();
+							//var senderId = this.cookie('userId');
+
+							console.log(aliinfor);
+							senderId = this.cookie('userId');
+
+
+							console.log(senderId);
+							_context6.prev = 5;
+
+							//
+							console.log("==========senderId========");
+							console.log(senderId);
+							aliinfor1 = (0, _stringify2.default)(aliinfor);
+							_context6.next = 11;
+							return mgm.aliVerify(senderId, "UTF-8", aliinfor1).then(function (result) {
+
+								return result;
+							}, function (error) {
+								return error;
+							});
+
+						case 11:
+							pm = _context6.sent;
+
+
+							console.log(pm);
+							_context6.next = 17;
+							break;
+
+						case 15:
+							_context6.prev = 15;
+							_context6.t0 = _context6['catch'](5);
+
+						case 17:
+							return _context6.abrupt('return', this.redirect("/report/query"));
+
+						case 18:
+						case 'end':
+							return _context6.stop();
+					}
+				}
+			}, _callee6, this, [[5, 15]]);
+		}));
+
+		function alipayreturnAction() {
+			return _ref6.apply(this, arguments);
+		}
+
+		return alipayreturnAction;
+	}();
+
+	_class.prototype.alipaynotifyAction = function () {
+		var _ref7 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee7() {
+			var infor, infor1, pm;
+			return _regenerator2.default.wrap(function _callee7$(_context7) {
+				while (1) {
+					switch (_context7.prev = _context7.next) {
+						case 0:
+
+							console.log("==========alipaynotifyAction start=========");
+							infor = this.post();
+
+							console.log(infor);
+							infor1 = (0, _stringify2.default)(infor);
+							_context7.next = 6;
+							return mgm.aliNotify(infor.out_trade_no, 'UTF-8', infor1).then(function (result) {
+
+								return result;
+							});
+
+						case 6:
+							pm = _context7.sent;
+
+
+							console.log(pm);
+
+							return _context7.abrupt('return', this.success(infor));
+
+						case 9:
+						case 'end':
+							return _context7.stop();
+					}
+				}
+			}, _callee7, this);
+		}));
+
+		function alipaynotifyAction() {
+			return _ref7.apply(this, arguments);
+		}
+
+		return alipaynotifyAction;
+	}();
+
+	_class.prototype.additemAction = function () {
+		var _ref8 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee8() {
+			var pdtinfor, senderId, pm;
+			return _regenerator2.default.wrap(function _callee8$(_context8) {
+				while (1) {
+					switch (_context8.prev = _context8.next) {
+						case 0:
+							console.log("==========alipaynotifyAction start=========");
+
+							if (!this.isGet()) {
+								_context8.next = 3;
+								break;
+							}
+
+							return _context8.abrupt('return', this.display());
+
+						case 3:
+							pdtinfor = this.post();
+
+
+							console.log(pdtinfor);
+							senderId = this.cookie('userId');
+							_context8.prev = 6;
+							_context8.next = 9;
+							return mgm.addItem(senderId, pdtinfor).then(function (result) {
+
+								return result;
+							});
+
+						case 9:
+							pm = _context8.sent;
+							_context8.next = 14;
+							break;
+
+						case 12:
+							_context8.prev = 12;
+							_context8.t0 = _context8['catch'](6);
+
+						case 14:
+							return _context8.abrupt('return', this.redirect('/back/pricelist'));
+
+						case 15:
+						case 'end':
+							return _context8.stop();
+					}
+				}
+			}, _callee8, this, [[6, 12]]);
+		}));
+
+		function additemAction() {
+			return _ref8.apply(this, arguments);
+		}
+
+		return additemAction;
+	}();
+
+	_class.prototype.deleteitemAction = function () {
+		var _ref9 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee9() {
+			var itemIdinfor, senderId, pm;
+			return _regenerator2.default.wrap(function _callee9$(_context9) {
+				while (1) {
+					switch (_context9.prev = _context9.next) {
+						case 0:
+
+							console.log("=========deleteAction start============");
+
+							itemIdinfor = this.get();
+							senderId = this.cookie('userId');
+							_context9.prev = 3;
+							_context9.next = 6;
+							return mgm.deleteTestItem(senderId, itemIdinfor.itemId).then(function (result) {
+
+								return result;
+							});
+
+						case 6:
+							pm = _context9.sent;
+
+
+							console.log(pm);
+
+							_context9.next = 12;
+							break;
+
+						case 10:
+							_context9.prev = 10;
+							_context9.t0 = _context9['catch'](3);
+
+						case 12:
+							return _context9.abrupt('return', this.redirect("/back/pricelist"));
+
+						case 13:
+						case 'end':
+							return _context9.stop();
+					}
+				}
+			}, _callee9, this, [[3, 10]]);
+		}));
+
+		function deleteitemAction() {
+			return _ref9.apply(this, arguments);
+		}
+
+		return deleteitemAction;
+	}();
+
+	return _class;
+}(_base2.default);
+
+exports.default = _class;
+//# sourceMappingURL=backextra.js.map

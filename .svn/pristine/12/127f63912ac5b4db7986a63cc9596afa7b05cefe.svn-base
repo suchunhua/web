@@ -1,0 +1,75 @@
+{% extends "./inc/base.html" %} 
+{% block style %} 
+<link rel="stylesheet" type="text/css" href="/static/assets/css/production.css">
+{% endblock %} 
+{% block content %}
+<div id="fullpage" class="container top">
+    <div class="col-md-12 fuManJia_head">
+   		<h1>福满家</h1>
+      	<h3>解读生命密码&emsp;综合健康管理</h3>
+    </div>
+    <div class="section">
+        <h1 class="blod">PRODUCT INTRODUCTION</h1>
+        <h3 class="regular">产品简介</h3>
+       	<p>福满家全基因检测是首度基因集团的一款健康体检类基因检测产品，通过高通量测序技术对人体内3万个基因的全部外显子序列进行扫描，运用自主开发的FD-SCAN运算系统，找出排序异常的DNA变异。结合FD-Databases综合人类数据库，同时解读4571种遗传疾病患病风险、26种个体特质偏好、132种药物适用程度、29种营养元素代谢能力、祖源成分分析及血型分析。并针对检测结果给予专业的疾病预防和健康管理建议，帮助您深度 了解自身，为您的健康保驾护航。</p>
+    </div>
+     <div class="section">
+        <h1 class="blod">PRODUCT CONTENT</h1>
+        <h3 class="regular">产品内容</h3>
+        <p> 福满家全基因检测全面扫描人类3万多个基因的全部外显子区域，详细分析4800多项遗传风险内容。其中包含19大类4571项疾病相关遗传风险，8大类210+项肺疾病类遗传特质。 </p>
+    </div>
+	<div class="section">
+        <h1 class="blod">SUITABLE CROWD</h1>
+        <h3 class="regular">适用人群</h3>
+        <h4>关注自身健康的所有人群</h4>
+       	<h4 class="crowdList" style="text-align:left;">尤其适合以下人群：</h4>
+       	<ul class="row poster-list">
+       		<li class="col-md-3"><img alt="" src="/static/assets/img/child.png"><span>儿童及青少年</span></li>
+       		<li class="col-md-3"><img alt="" src="/static/assets/img/pregnancy.png"><span>婚前（孕前）人群</span></li>
+       		<li class="col-md-3"><img alt="" src="/static/assets/img/sub-health.png"><span>亚健康人群</span></li>
+       		<li class="col-md-3"><img alt="" src="/static/assets/img/disease.png"><span>疾病高危人群</span></li>
+       	</ul>
+       	<h4>疾病高危人群：</h4>
+       	<p>1.遗传疾病家族史人群：如癌症、心脑血管疾病、糖尿病等。<br/>
+       	2.长期处于高危致病环境人群：如射线辐射行业、建筑装潢、高烟高粉尘行业、采矿冶金行业、化工行业等。</p>
+     </div>
+     <div class="section">
+       <h1 class="blod">DETECTION PROCESS</h1>
+       <h3 class="regular">检测流程</h3>
+       <ul class="row">
+       	<li class="col-md-3">
+       		<h5 class="background"><i class="num">1</i>检测预约</h5>
+       	</li>
+       	<li class="col-md-3">
+       		<h5 class="background"><i class="num">2</i>接收样本采集包</h5>
+       	</li>
+       	<li class="col-md-3">
+       		<h5 class="background"><i class="num">3</i>样本采集</h5>
+       	</li>
+       	<li class="col-md-3">
+       		<h5 class="background"><i class="num">4</i>样本速达</h5>
+       	</li>
+       	<li class="col-md-3">
+       		<h5 class="background"><i class="num">5</i>上机测序</h5>
+       	</li>
+       	<li class="col-md-3">
+       		<h5 class="background"><i class="num">6</i>数据分析</h5>
+       	</li>
+       	<li class="col-md-3">
+       		<h5 class="background"><i class="num">7</i>获取报告</h5>
+       	</li>
+       	<li class="col-md-3">
+       		<h5 class="background"><i class="num">8</i>报告解读</h5>
+       	</li>
+       </ul>
+   </div>
+    <div class="section">
+    	<h1 class="blod">官方唯一合作伙伴</h1>
+    	<p class="regular" style="font-size: 20px;">陈经理：18820708621</p>
+    </div>
+    </div>
+{% endblock %} {% block script %}
+<script>
+$(function() {});
+</script>
+{% endblock %}

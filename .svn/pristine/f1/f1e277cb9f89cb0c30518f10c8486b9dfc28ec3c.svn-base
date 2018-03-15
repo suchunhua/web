@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\news.js"
+    ],
+    "names": [
+        "getAction",
+        "think",
+        "isEmpty",
+        "get",
+        "detail",
+        "list",
+        "model",
+        "where",
+        "id",
+        "find",
+        "news",
+        "success",
+        "page",
+        "size",
+        "type",
+        "fail",
+        "isdelete",
+        "title",
+        "order",
+        "countSelect",
+        "deleteAction",
+        "postAction",
+        "post",
+        "thumbnail",
+        "content",
+        "add",
+        "update"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;;;;;;;;;mBAIQA,S;;;;;;AACJ,kBAAI,CAACC,MAAMC,OAAN,CAAc,KAAKC,GAAL,CAAS,IAAT,CAAd,CAAL,EAAoC;AAClC,qBAAKC,MAAL;AACD,eAFD,MAEO;AACL,qBAAKC,IAAL;AACD;;;;;;;;;;;;;;;;;mBAGGD,M;;;;;;;;qBACa,KAAKE,KAAL,CAAW,MAAX,EACdC,KADc,CACR,EAACC,IAAI,KAAKL,GAAL,CAAS,IAAT,CAAL,EADQ,EACcM,IADd,E;;;AAAbC,kB;gDAEG,KAAKC,OAAL,CAAaD,IAAb,C;;;;;;;;;;;;;;;;;mBAIHL,I;;;;;;;AACAO,kB,GAAO,KAAKT,GAAL,CAAS,MAAT,KAAoB,C;AAC3BU,kB,GAAO,KAAKV,GAAL,CAAS,MAAT,KAAoB,E;AAC3BW,kB,GAAO,KAAKX,GAAL,CAAS,MAAT,C;;mBACPF,MAAMC,OAAN,CAAcY,IAAd,C;;;;;gDACK,KAAKC,IAAL,CAAU,oBAAV,C;;;AAELR,mB,GAAQ;AACVO,sBAAKA,IADK;AAEVE,0BAAS;AAFC,e;;AAIZ,kBAAG,KAAKb,GAAL,CAAS,KAAT,CAAH,EAAmB;AACjBI,sBAAMU,KAAN,GAAc,CAAC,MAAD,EAAQ,MAAI,KAAKd,GAAL,CAAS,KAAT,CAAJ,GAAoB,GAA5B,CAAd;AACD;;qBACgB,KAAKG,KAAL,CAAW,MAAX,EACdC,KADc,CACRA,KADQ,EAEdW,KAFc,CAER,iBAFQ,EAGdN,IAHc,CAGTA,IAHS,EAGHC,IAHG,EAIdM,WAJc,CAIF,KAJE,C;;;AAAbd,kB;gDAMG,KAAKM,OAAL,CAAaN,IAAb,C;;;;;;;;;;;;;;;;;mBAGHe,Y;;;;;;;;;;;;;;;;;;;;;;;mBAIAC,U;;;;;;;AACAb,gB,GAAK,KAAKc,IAAL,CAAU,IAAV,C;AACLR,kB,GAAO,KAAKQ,IAAL,CAAU,MAAV,C;AACPL,mB,GAAQ,KAAKK,IAAL,CAAU,OAAV,C;AACRC,uB,GAAY,KAAKD,IAAL,CAAU,WAAV,C;AACZE,qB,GAAU,KAAKF,IAAL,CAAU,SAAV,C;;oBACXrB,MAAMC,OAAN,CAAcY,IAAd,KAAuBb,MAAMC,OAAN,CAAce,KAAd,CAAvB,IAA+ChB,MAAMC,OAAN,CAAcqB,SAAd,CAA/C,IAA2EtB,MAAMC,OAAN,CAAcsB,OAAd,C;;;;;gDACrE,KAAKT,IAAL,CAAU,oBAAV,C;;;mBAENd,MAAMC,OAAN,CAAcM,EAAd,C;;;;;6BACM,I;;qBAAmB,KAAKF,KAAL,CAAW,MAAX,EAAmBmB,GAAnB,CAAuB,KAAKH,IAAL,EAAvB,C;;;;6DAAdX,O;;;6BAGL,I;;qBAAmB,KAAKL,KAAL,CAAW,MAAX,EAAmBoB,MAAnB,CAA0B,KAAKJ,IAAL,EAA1B,C;;;;6DAAdX,O;;;;;;;;;;;;;;;;;;;;;AAGjB",
+    "file": "..\\..\\..\\src\\admin\\controller\\news.js",
+    "sourcesContent": [
+        "import Base from './base.js';\r\n\r\nexport default class extends Base {\r\n\t\r\n  async getAction() {\r\n    if (!think.isEmpty(this.get(\"id\"))) {                                                                                                                                                                  \r\n      this.detail();\r\n    } else {\r\n      this.list();\r\n    }\r\n  }\r\n\r\n  async detail() {\r\n    let news = await this.model('news')\r\n      .where({id: this.get(\"id\")}).find();\r\n    return this.success(news);\r\n  }\r\n\r\n\r\n  async list() {\r\n    let page = this.get('page') || 1;\r\n    let size = this.get('size') || 10;\r\n    let type = this.get('type');\r\n    if (think.isEmpty(type)) {\r\n      return this.fail('ADMIN_PARAM_LACKED');\r\n    } \r\n    let where = {\r\n      type:type,\r\n      isdelete:0\r\n    };\r\n    if(this.get('key')){\r\n      where.title = ['like','%'+this.get('key')+'%'];\r\n    }\r\n    let list = await this.model('news')\r\n      .where(where)\r\n      .order(\"updatetime DESC\")\r\n      .page(page, size)\r\n      .countSelect(false);\r\n\r\n    return this.success(list);\r\n  }\r\n\r\n  async deleteAction(){\r\n    return ;\r\n  }\r\n\r\n  async postAction(){\r\n    let id = this.post('id'); \r\n    let type = this.post('type');\r\n    let title = this.post('title');\r\n    let thumbnail = this.post('thumbnail');\r\n    let content = this.post('content');\r\n    if(think.isEmpty(type) || think.isEmpty(title) || think.isEmpty(thumbnail) || think.isEmpty(content)){\r\n      return this.fail('ADMIN_PARAM_LACKED')\r\n    }\r\n    if(think.isEmpty(id)){\r\n      return this.success(await this.model('news').add(this.post()));\r\n    }else{\r\n      //修改\r\n      return this.success(await this.model('news').update(this.post()));\r\n    }\r\n  }\r\n};"
+    ]
+}

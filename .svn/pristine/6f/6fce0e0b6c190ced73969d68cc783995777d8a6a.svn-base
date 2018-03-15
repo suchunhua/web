@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\home\\controller\\backmanager.js"
+    ],
+    "names": [
+        "indexAction",
+        "display",
+        "userlistAction"
+    ],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;AACA;;;;;;;;;;;;;;kBAECA,W,0BAAa;AACZ,SAAO,KAAKC,OAAL,EAAP;AACA,E;;kBAGDC,c,6BAAgB;AACf,SAAO,KAAKD,OAAL,EAAP;AACA,E",
+    "file": "..\\..\\..\\src\\home\\controller\\backmanager.js",
+    "sourcesContent": [
+        "'use strict'\r\nimport Base from './base.js';\r\nexport default class extends Base{\r\n\tindexAction(){\r\n\t\treturn this.display();\r\n\t}\r\n\r\n\r\n\tuserlistAction(){\r\n\t\treturn this.display();\r\n\t}\r\n}"
+    ]
+}

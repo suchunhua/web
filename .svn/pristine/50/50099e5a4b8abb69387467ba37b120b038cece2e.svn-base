@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\home\\controller\\agent.js"
+    ],
+    "names": [
+        "indexAction",
+        "display"
+    ],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;AAGE;;;;mBAIAA,W,0BAAa;AACX;AACA,WAAO,KAAKC,OAAL,EAAP;AACD,G",
+    "file": "..\\..\\..\\src\\home\\controller\\agent.js",
+    "sourcesContent": [
+        "'use strict';\r\n\r\nimport Base from './base.js';\r\n\r\nexport default class extends Base {\r\n  /**\r\n   * index action\r\n   * @return {Promise} []\r\n   */\r\n  indexAction(){\r\n    //auto render template file index_index.html\r\n    return this.display();\r\n  }\r\n}"
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\modify.js"
+    ],
+    "names": [
+        "postAction",
+        "username",
+        "post",
+        "oldword",
+        "newword",
+        "fail",
+        "tokenService",
+        "think",
+        "service",
+        "tokenServiceInstance",
+        "verifyToken",
+        "http",
+        "headers",
+        "token",
+        "userInfo",
+        "console",
+        "log",
+        "model",
+        "where",
+        "id",
+        "field",
+        "select",
+        "user",
+        "password",
+        "update",
+        "success"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;;;;;;;;;;;kBAGOA,U;;;;;;;AACL;AACIC,e,GAAW,KAAKC,IAAL,CAAU,UAAV,C;AACXC,c,GAAU,KAAKD,IAAL,CAAU,KAAV,C;AACVE,c,GAAU,KAAKF,IAAL,CAAU,KAAV,C;;aACX,CAACC,OAAD,IAAY,CAACC,O;;;;;wCACR,KAAKC,IAAL,CAAU,oBAAV,C;;;AAEJC,mB,GAAeC,MAAMC,OAAN,CAAc,OAAd,C;AACZC,2B,GAAuB,IAAIH,YAAJ,E;;cACTG,qBAAqBC,WAArB,CAAiC,KAAKC,IAAL,CAAUC,OAAV,CAAkBC,KAAnD,C;;;AAAjBC,e;;AACJC,eAAQC,GAAR,CAAYF,QAAZ;;cACiB,KAAKG,KAAL,CAAW,OAAX,EACbC,KADa,CACP,EAACC,IAAGL,SAASA,QAAT,CAAkBK,EAAtB,EADO,EAEbC,KAFa,CAEP,CAAC,sBAAD,CAFO,EAGbC,MAHa,E;;;AAAbC,W;;aAKDA,KAAK,CAAL,EAAQC,QAAR,IAAoBpB,O;;;;;AACtBmB,YAAK,CAAL,EAAQC,QAAR,GAAmBnB,OAAnB;qBACO,I;;cAAmB,KAAKa,KAAL,CAAW,OAAX,EAAoBO,MAApB,CAA2BF,KAAK,CAAL,CAA3B,C;;;;oDAAdG,O;;;wCAEL,KAAKpB,IAAL,CAAU,OAAV,C",
+    "file": "..\\..\\..\\src\\admin\\controller\\modify.js",
+    "sourcesContent": [
+        "import Base from './base.js';\r\n\r\nexport default class extends Base {\r\n\tasync postAction(){\r\n\t\t// console.log(this.http.headers.token);\r\n\t\tlet username = this.post('username');\r\n\t\tlet oldword = this.post('old');\r\n\t\tlet newword = this.post('new');\r\n\t\tif(!oldword || !newword ){\r\n\t\t\treturn this.fail('ADMIN_PARAM_LACKED');\r\n\t\t}\r\n\t\tlet tokenService = think.service(\"token\");\r\n\t    let tokenServiceInstance = new tokenService();\r\n\t\tlet userInfo = await tokenServiceInstance.verifyToken(this.http.headers.token);\r\n\t\tconsole.log(userInfo);\r\n\t\tlet user = await this.model('admin')\r\n\t\t\t\t\t.where({id:userInfo.userInfo.id})\r\n\t\t\t\t\t.field(['id,username,password'])\r\n\t\t\t\t\t.select();\r\n\r\n\t\tif(user[0].password == oldword){\r\n\t\t\tuser[0].password = newword;\r\n\t\t\treturn this.success(await this.model('admin').update(user[0]));\r\n\t\t}else{\r\n\t\t\treturn this.fail('原密码错误');\r\n\t\t}\r\n\t}\r\n}"
+    ]
+}

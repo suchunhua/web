@@ -1,0 +1,488 @@
+'use strict';
+
+exports.__esModule = true;
+
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _base = require('./base.js');
+
+var _base2 = _interopRequireDefault(_base);
+
+var _usermgr = require('../connect/usermgr.js');
+
+var _usermgr2 = _interopRequireDefault(_usermgr);
+
+var _bizmgr = require('../connect/bizmgr.js');
+
+var _bizmgr2 = _interopRequireDefault(_bizmgr);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mgr = new _usermgr2.default();
+//-------------------------------
+var mgm = new _bizmgr2.default();
+
+var _class = function (_Base) {
+	(0, _inherits3.default)(_class, _Base);
+
+	function _class() {
+		(0, _classCallCheck3.default)(this, _class);
+		return (0, _possibleConstructorReturn3.default)(this, _Base.apply(this, arguments));
+	}
+
+	_class.prototype.indexAction = function () {
+		var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+			return _regenerator2.default.wrap(function _callee$(_context) {
+				while (1) {
+					switch (_context.prev = _context.next) {
+						case 0:
+							return _context.abrupt('return', this.display());
+
+						case 1:
+						case 'end':
+							return _context.stop();
+					}
+				}
+			}, _callee, this);
+		}));
+
+		function indexAction() {
+			return _ref.apply(this, arguments);
+		}
+
+		return indexAction;
+	}();
+
+	_class.prototype.downloadAction = function () {
+		var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
+			var orderId, userId, pm, pillinfor, pillinfor1, filename, address, __filename, filePath;
+
+			return _regenerator2.default.wrap(function _callee2$(_context2) {
+				while (1) {
+					switch (_context2.prev = _context2.next) {
+						case 0:
+							_context2.prev = 0;
+							orderId = this.get("orderId");
+
+
+							console.log(orderId);
+							userId = this.cookie("userId");
+							_context2.next = 6;
+							return mgm.downLoadPill(userId, orderId).then(function (result) {
+
+								console.log(result);
+								return result;
+							}, function (error) {});
+
+						case 6:
+							pm = _context2.sent;
+							pillinfor = pm.receipt;
+
+							console.log(typeof pillinfor === 'undefined' ? 'undefined' : (0, _typeof3.default)(pillinfor));
+							pillinfor1 = JSON.parse(pillinfor);
+
+							console.log(typeof pillinfor1 === 'undefined' ? 'undefined' : (0, _typeof3.default)(pillinfor1));
+
+							console.log(pillinfor1[0].fphm);
+							//var pillinfor2 =JSON.stringify(pillinfor1);
+							//console.log(pillinfor[2]);
+
+							console.log(pillinfor1[0].fphm);
+							//var filename = 'user.js';
+
+							//var address = 'C://Users//Administrator//Desktop//test//';
+							//var address = 'C://Users//Administrator//Desktop//fdmweb22//fdmweb//src//home//controller//'
+							filename = pillinfor1[0].fphm + '_personal.pdf';
+
+							//var filename1 =  pillinfor1[0].fphm+ '.pdf';
+							/*var test = 'jcltest';
+       var filename = test+'_个人.pdf' ;
+       var filename1 = test+'.pdf' ;*/
+
+							//var filename = '16359593_个人.pdf' ;
+							//var filename = '11.txt' ;
+							//var filename = '16359582.pdf' ;
+							//var address = '//fp//'
+
+							address = '/fp1/';
+							__filename = address + filename;
+							filePath = __filename;
+
+
+							this.download(filePath);
+							_context2.next = 23;
+							break;
+
+						case 20:
+							_context2.prev = 20;
+							_context2.t0 = _context2['catch'](0);
+							return _context2.abrupt('return', this.error("没有发票信息"));
+
+						case 23:
+						case 'end':
+							return _context2.stop();
+					}
+				}
+			}, _callee2, this, [[0, 20]]);
+		}));
+
+		function downloadAction() {
+			return _ref2.apply(this, arguments);
+		}
+
+		return downloadAction;
+	}();
+
+	_class.prototype.queryAction = function () {
+		var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3() {
+			var userId, pm, sendDate1, testList1, _testList, j, sendDate;
+
+			return _regenerator2.default.wrap(function _callee3$(_context3) {
+				while (1) {
+					switch (_context3.prev = _context3.next) {
+						case 0:
+							_context3.prev = 0;
+							userId = this.cookie("userId");
+
+							console.log("========queryAction============");
+							console.log(userId);
+							_context3.next = 6;
+							return mgm.queryOrder(userId).then(function (result) {
+
+								console.log(result);
+								return result;
+							}, function (error) {
+								console.log(error);
+							});
+
+						case 6:
+							pm = _context3.sent;
+
+
+							//console.log(pm);
+							//console.log(pm.testList);
+							this.assign("pm", pm);
+							//for(let j in pm){
+							//var elm = pm.testList;
+							// console.log(elm.userId + "|" + elm.name + "|" + elm.password); 
+							// this.assign('elm',elm);
+
+							console.log("====pm==========");
+							console.log(pm);
+							console.log(pm.testList.length);
+							console.log(pm.testList.sendDate);
+
+							if (pm.testList.length == null) {
+								console.log("一条订单的时候");
+								//console.log(pm.testList);
+								sendDate1 = pm.testList.sendDate.substring(0, 10);
+								testList1 = new Array();
+
+								testList1.push(sendDate1);
+								this.assign("sendDate", sendDate1);
+								this.assign('testList1', pm.testList);
+							} else {
+								_testList = new Array();
+
+								for (j in pm.testList) {
+									sendDate = pm.testList[j].sendDate.substring(0, 10);
+
+									_testList.push(sendDate);
+								}
+								console.log(_testList);
+								this.assign("sendDate", _testList);
+								this.assign('testList', pm.testList);
+							}
+
+							//this.assign('testList',pm.testList.phoneNumber);
+							// }
+							//this.assign("pm",pm);
+
+							_context3.next = 17;
+							break;
+
+						case 15:
+							_context3.prev = 15;
+							_context3.t0 = _context3['catch'](0);
+
+						case 17:
+							return _context3.abrupt('return', this.display());
+
+						case 18:
+						case 'end':
+							return _context3.stop();
+					}
+				}
+			}, _callee3, this, [[0, 15]]);
+		}));
+
+		function queryAction() {
+			return _ref3.apply(this, arguments);
+		}
+
+		return queryAction;
+	}();
+
+	_class.prototype.billAction = function () {
+		var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4() {
+			var infor, userId, testItem, aa, testItemName, pp, gp, price, minprice, pp1, gp1, price1, minprice1, pp2, gp2, price2, minprice2, priceTatol, minpriceTatol, reptReceiver_1, reptReceiver_2, sendDate, sendDate1;
+			return _regenerator2.default.wrap(function _callee4$(_context4) {
+				while (1) {
+					switch (_context4.prev = _context4.next) {
+						case 0:
+							console.log("=====billAction=========");
+							infor = this.get();
+							userId = this.cookie('userId');
+
+
+							console.log(infor.testItem);
+							testItem = infor.testItem;
+							aa = testItem.split(",");
+
+							console.log(aa);
+							console.log(aa.length);
+							testItemName = ["FD-Tissue-180", "FD-ctDNA-180", "FD-Tissue-600", "FD-ctDNA-600", "FD-Exome", "FD-ctDNA-Exome", "FD-Tissue-RNA", "FD-Tissue-180+FD-ctDNA-180", "FD-Tissue-600+FD-ctDNA-600"];
+
+							this.assign('itemName1', testItemName[aa[0] - 1]);
+							this.assign('itemName1Num', aa[1]);
+							this.assign('itemName2', testItemName[aa[2] - 1]);
+							this.assign('itemName2Num', aa[3]);
+							this.assign('itemName3', testItemName[aa[4] - 1]);
+							this.assign('itemName3Num', aa[5]);
+							console.log(aa[0]);
+							console.log(testItemName[aa[0] - 1]);
+							console.log(aa[1]);
+							console.log(testItemName[aa[2] - 1]);
+							console.log(aa[3]);
+							console.log(testItemName[aa[4] - 1]);
+							console.log(aa[5]);
+
+							_context4.prev = 22;
+							_context4.next = 25;
+							return mgm.getPersonCurrentPrice(userId, aa[0], infor.code).then(function (result) {
+
+								console.log("=========ppp=========");
+
+								console.log(result);
+								return result;
+							});
+
+						case 25:
+							pp = _context4.sent;
+
+							console.log(pp.price);
+
+							//10个A的价格	 	
+							_context4.next = 29;
+							return mgm.getCurrentPrice(aa[0], 'AAAAAAAAAA').then(function (result) {
+								console.log(result.itemId + result.price + "----------------");
+								//
+								console.log("-----------------");
+
+								return result;
+							});
+
+						case 29:
+							gp = _context4.sent;
+
+							// console.log(gp);
+							// this.assign('price',gp);
+
+
+							console.log(gp.price);
+
+							price = gp.price;
+							minprice = pp.price < gp.price ? pp.price : gp.price;
+
+
+							console.log(price);
+							_context4.next = 38;
+							break;
+
+						case 36:
+							_context4.prev = 36;
+							_context4.t0 = _context4['catch'](22);
+
+						case 38:
+							if (!(aa[2] != null)) {
+								_context4.next = 55;
+								break;
+							}
+
+							_context4.prev = 39;
+							_context4.next = 42;
+							return mgm.getPersonCurrentPrice(userId, aa[2], infor.code).then(function (result) {
+
+								console.log("=========ppp=========");
+
+								console.log(result);
+								return result;
+							});
+
+						case 42:
+							pp1 = _context4.sent;
+
+							console.log(pp1.price);
+
+							_context4.next = 46;
+							return mgm.getCurrentPrice(aa[2], 'AAAAAAAAAA').then(function (result) {
+								console.log(result.itemId + result.price + "----------------");
+								//
+								console.log("-----------------");
+
+								return result;
+							});
+
+						case 46:
+							gp1 = _context4.sent;
+
+							console.log(gp1);
+							// this.assign('price',gp);
+
+							price1 = gp1.price;
+							minprice1 = pp1.price < gp1.price ? pp1.price : gp1.price;
+
+
+							console.log(price1);
+							_context4.next = 55;
+							break;
+
+						case 53:
+							_context4.prev = 53;
+							_context4.t1 = _context4['catch'](39);
+
+						case 55:
+							if (!(aa[4] != null)) {
+								_context4.next = 72;
+								break;
+							}
+
+							_context4.prev = 56;
+							_context4.next = 59;
+							return mgm.getPersonCurrentPrice(userId, aa[4], infor.code).then(function (result) {
+
+								console.log("=========ppp=========");
+
+								console.log(result);
+								return result;
+							});
+
+						case 59:
+							pp2 = _context4.sent;
+
+							console.log(pp2.price);
+
+							_context4.next = 63;
+							return mgm.getCurrentPrice(aa[4], 'AAAAAAAAAA').then(function (result) {
+								console.log(result.itemId + result.price + "----------------");
+								//
+								console.log("-----------------");
+
+								return result;
+							});
+
+						case 63:
+							gp2 = _context4.sent;
+
+							console.log(gp2);
+							// this.assign('price',gp);
+							price2 = gp2.price;
+							minprice2 = pp2.price < gp2.price ? pp2.price : gp2.price;
+
+
+							console.log(price2);
+							_context4.next = 72;
+							break;
+
+						case 70:
+							_context4.prev = 70;
+							_context4.t2 = _context4['catch'](56);
+
+						case 72:
+
+							console.log(price1);
+
+							priceTatol = price * aa[1];
+							minpriceTatol = minprice * aa[1];
+
+
+							if (price1 != null) {
+
+								priceTatol = priceTatol + price1 * aa[3];
+
+								minpriceTatol = minpriceTatol + minprice1 * aa[3];
+							}
+
+							if (price2 != null) {
+								priceTatol = priceTatol + price2 * aa[5];
+
+								minpriceTatol = minpriceTatol + minprice2 * aa[5];
+							}
+
+							console.log(minpriceTatol);
+							this.assign("priceTatol", priceTatol);
+							this.assign("minpriceTatol", minpriceTatol);
+
+							console.log(priceTatol);
+
+							console.log("==========infor==========");
+							console.log(infor);
+							this.assign("inforbill", infor);
+
+							console.log(infor.recvAddress);
+							reptReceiver_1 = infor.reptReceiver;
+							reptReceiver_2 = encodeURIComponent(reptReceiver_1);
+
+							console.log(reptReceiver_2);
+							this.assign("reptReceiver", reptReceiver_2);
+
+							sendDate = infor.sendDate;
+							sendDate1 = sendDate.substring(0, 10);
+
+
+							this.assign("sendDate1", sendDate1);
+
+							return _context4.abrupt('return', this.display());
+
+						case 93:
+						case 'end':
+							return _context4.stop();
+					}
+				}
+			}, _callee4, this, [[22, 36], [39, 53], [56, 70]]);
+		}));
+
+		function billAction() {
+			return _ref4.apply(this, arguments);
+		}
+
+		return billAction;
+	}();
+
+	return _class;
+}(_base2.default);
+
+exports.default = _class;
+//# sourceMappingURL=report.js.map
